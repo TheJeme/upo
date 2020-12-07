@@ -13,13 +13,15 @@ function player:update(dt)
   --playerPosX = playerPosX + (positionToMouseX * dt * 8)
   --playerPosY = playerPosY + (positionToMouseY * dt * 8)
   
-
-  
-  
-  local dist = (mx - gw/2)^2 + (my - gh/2)^2
-  if (dist < (450-12)^2) then
+  dx = mx - gw/2
+  dy = my - gh/2
+  dist = math.sqrt(dx^2+dy^2)
+  if (dist < (450-12)) then
     playerPosX = mx
-    playerPosY = my
+    playerPosY = my    
+  else
+    playerPosX = gw/2 + dx/dist*(450-15)
+    playerPosY = gh/2 + dy/dist*(450-15)
   end
 end
 
@@ -30,7 +32,6 @@ function player:draw()
   love.graphics.circle('fill', playerPosX, playerPosY, 15, 120)
   love.graphics.setColor(1, 1, 1, 1)
   love.graphics.circle('line', playerPosX, playerPosY, 15, 120)
-  
   love.graphics.setLineWidth(2)
   love.graphics.circle('line', mx, my, 12)
   --love.graphics.polygon('line', playerPosX - 14, playerPosY + 10, 
