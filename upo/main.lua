@@ -14,7 +14,7 @@ function love.load()
   beloved:load()
   statemanager:load()
   love.graphics.setBackgroundColor(0.1, 0.1, 0.1, 1)
-  love.mouse.setVisible(false)
+  --love.mouse.setVisible(false)
 end
 
 function love.update(dt)
