@@ -27,5 +27,25 @@ function statemanager:draw()
   end
 end
 
+function statemanager:mousepressed(x, y, button)
+  if (currentState == "game") then
+    maingame:mousepressed(x, y, button)
+  elseif (currentState == "menu") then
+    mainmenu:mousepressed(x, y, button)
+  end
+end
+
+function statemanager:keypressed(key)
+  if (currentState == "game") then
+    maingame:keypressed(key)
+  elseif (currentState == "menu") then
+    mainmenu:keypressed(key)
+  end
+end
+
+function statemanager:changeState(state)
+  currentState = state
+end
+
 
 return statemanager

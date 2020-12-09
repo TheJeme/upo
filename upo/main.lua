@@ -9,12 +9,12 @@ require 'managers/gamemanager'
 
 function love.load()
   math.randomseed(os.time())
-  simpleScale.setWindow(gw, gh, 1280, 720)
+  simpleScale.setWindow(gw, gh, 1920, 1080)
   love.window.setVSync(0)
   beloved:load()
   statemanager:load()
   love.graphics.setBackgroundColor(0.1, 0.1, 0.1, 1)
-  --love.mouse.setVisible(false)
+  love.mouse.setVisible(false)
 end
 
 function love.update(dt)
@@ -28,21 +28,17 @@ function love.draw()
     statemanager:draw()
 	simpleScale.unSet()
   beloved:draw()
+  love.graphics.setFont(smallScoreFont)
   love.graphics.print("FPS " .. love.timer.getFPS())
 end
 
 
 function love.mousepressed(x, y, button)
   beloved:mousepressed(x, y, button)
-end
-
-function love.mousereleased(x, y, button)
-  beloved:mousereleased(x, y, button)
+  statemanager:mousepressed(x, y, button)
 end
 
 function love.keypressed(key)
   beloved:keypressed(key)
-  if (key == "escape") then
-    love.event.quit()
-  end
+  statemanager:keypressed(key)
 end

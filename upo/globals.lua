@@ -2,6 +2,13 @@ gw = 1920
 gh = 1080
 
 defaultFont = love.graphics.getFont()
+bigScoreFont = love.graphics.newFont('assets/roboto-thin.ttf', 106)
+smallScoreFont = love.graphics.newFont('assets/roboto-thin.ttf', 32)
+scoreFont = love.graphics.newFont('assets/roboto-thin.ttf', 64)
+levelScoreFont = love.graphics.newFont('assets/roboto-thin.ttf', 34)
+titleFont = love.graphics.newFont('assets/roboto.ttf', 56)
+levelTitleFont = love.graphics.newFont('assets/roboto.ttf', 34)
+logoFont = love.graphics.newFont('assets/roboto.ttf', 152)
 
 resolutionList = {
                   {2560, 1440},

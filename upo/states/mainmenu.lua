@@ -1,90 +1,391 @@
+require 'objects/cursor'
+require 'objects/button'
+
 mainmenu = {}
 
-function mainmenu:load()
+local resolutionIndex, volumeValue
 
+function mainmenu:load()
+  resolutionIndex = 2
+  volumeValue = 100
+  cursor:load()
+  menustate = "main"
+  
+  playButton = newButton(gw/2 - 450, gh*0.5, 900, 100, function() menustate = "levels" end)
+  optionsButton = newButton(gw/2 - 450, gh*0.5 + 100, 900, 100, function() menustate = "options" end)
+  quitButton = newButton(gw/2 - 450, gh*0.5 + 200, 900, 100, function() menustate = "quit" end)
+  
+  quitYesButton = newButton(gw/2 - 450, gh*0.5, 900, 100, function() love.event.quit() end)
+  quitNoButton = newButton(gw/2 - 450, gh*0.5 + 100, 900, 100, function() menustate = "main" end)
+  
+  optionsResolutionButton = newButton(gw/2 - 450, gh*0.5, 900, 100, function() resolutionIndex = resolutionIndex + 1 end, function() resolutionIndex = resolutionIndex - 1 end)
+  optionsVolumeButton = newButton(gw/2 - 450, gh*0.5 + 100, 900, 100, function() volumeValue = volumeValue + 5 end, function() volumeValue = volumeValue - 5 end)
+  optionsBackButton = newButton(gw/2 - 450, gh*0.5 + 200, 900, 100, function() menustate = "main" end)
+  
+  level1Button = newButton(gw/2 - 450, gh*0.1 - 20, 900, 140, function() statemanager:changeState("game") maingame:restart() end)
+  level2Button = newButton(gw/2 - 450, gh*0.1 + 120, 900, 120, function() statemanager:changeState("game") maingame:restart() end)
+  level3Button = newButton(gw/2 - 450, gh*0.1 + 240, 900, 120, function() statemanager:changeState("game") maingame:restart() end)
+  level4Button = newButton(gw/2 - 450, gh*0.1 + 360, 900, 120, function() statemanager:changeState("game") maingame:restart() end)
+  level5Button = newButton(gw/2 - 450, gh*0.1 + 480, 900, 120, function() statemanager:changeState("game") maingame:restart() end)
+  level6Button = newButton(gw/2 - 450, gh*0.1 + 600, 900, 120, function() statemanager:changeState("game") maingame:restart() end)
+  
+  levelBackButton = newButton(gw/2 - 450, gh*0.1 + 720, 900, 160, function() menustate = "main" end)
 end
 
 function mainmenu:update(dt)
-
+  cursor:update(dt)
+  
+  if (menustate == "main") then
+    playButton:update(dt)
+    optionsButton:update(dt)
+    quitButton:update(dt)
+  elseif (menustate == "options") then
+    optionsResolutionButton:update(dt)
+    optionsVolumeButton:update(dt)
+    optionsBackButton:update(dt)
+  elseif (menustate == "quit") then
+    quitYesButton:update(dt)
+    quitNoButton:update(dt)
+  elseif (menustate == "levels") then
+    level1Button:update(dt)
+    level2Button:update(dt)
+    level3Button:update(dt)
+    level4Button:update(dt)
+    level5Button:update(dt)
+    level6Button:update(dt)
+    levelBackButton:update(dt)
+  end
 end
 
-function mainmenu:draw()
+function mainmenu:draw()  
   love.graphics.setBackgroundColor(25 / 255, 25 / 255, 25 / 255, 1)
   love.graphics.setColor(85 / 255, 105 / 255, 145 / 255, 1)
   love.graphics.circle("fill", gw/2, gh/2, 450)
   love.graphics.setColor(1, 1, 1, 1)
+  
+  if(menustate == "main") then    
+    mainmenu:mainButtons()
+  elseif(menustate == "options") then   
+    mainmenu:optionsButtons()
+  elseif(menustate == "quit") then   
+    mainmenu:quitButtons()
+  elseif(menustate == "levels") then   
+    mainmenu:levels()
+  end
+  
   love.graphics.setLineWidth(5)
   love.graphics.circle("line", gw/2, gh/2, 450)
-  love.graphics.printf("upo", 0, gh*0.27, gw, "center")
+  cursor:draw()
+end
 
-  love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
-  love.graphics.rectangle('fill', gw*0.4, gh*0.48, gw*0.2, gh*0.1)
+function mainmenu:mousepressed(x, y, button)
+  if (menustate == "main") then
+    playButton:mousepressed(x, y, button)
+    optionsButton:mousepressed(x, y, button)
+    quitButton:mousepressed(x, y, button)
+  elseif (menustate == "options") then
+    optionsResolutionButton:mousepressed(x, y, button)
+    optionsVolumeButton:mousepressed(x, y, button)
+    optionsBackButton:mousepressed(x, y, button)
+  elseif (menustate == "quit") then
+    quitYesButton:mousepressed(x, y, button)
+    quitNoButton:mousepressed(x, y, button)
+  elseif (menustate == "levels") then
+    level1Button:mousepressed(x, y, button)
+    level2Button:mousepressed(x, y, button)
+    level3Button:mousepressed(x, y, button)
+    level4Button:mousepressed(x, y, button)
+    level5Button:mousepressed(x, y, button)
+    level6Button:mousepressed(x, y, button)
+    levelBackButton:mousepressed(x, y, button)
+  end
+end
+
+function mainmenu:keypressed(key)
+  if (key == "escape") then
+    if (menustate == "main") then
+      menustate = "quit"
+    elseif (menustate == "options") then
+      menustate = "main"
+    elseif (menustate == "levels") then
+      menustate = "main"
+    end
+  end
+end
+
+function mainmenu:mainButtons()
+  love.graphics.setFont(logoFont)
+  love.graphics.printf("upo", 0, gh*0.22, gw, "center")
+  
+  love.graphics.setFont(titleFont)  
+  
+  if (playButton:getHoverState()) then
+    love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
+  else
+    love.graphics.setColor(0, 0, 0, 0)
+  end
+  love.graphics.polygon('fill', gw/2 - 450, gh*0.5,
+                                gw/2 + 450, gh*0.5, 
+                                gw/2 + 450, gh*0.5 + 100,
+                                gw/2 - 450, gh*0.5 + 100)
   love.graphics.setColor(1, 1, 1, 1)
   love.graphics.printf("Play", 0, gh*0.52, gw, "center")
-  love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
-  love.graphics.rectangle('fill', gw*0.4, gh*0.58, gw*0.2, gh*0.1)
+  
+  if (optionsButton:getHoverState()) then
+    love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
+  else
+    love.graphics.setColor(0, 0, 0, 0)
+  end
+  love.graphics.polygon('fill', gw/2 - 450, gh*0.5 + 100,
+                                gw/2 + 450, gh*0.5 + 100, 
+                                gw/2 + 450, gh*0.5 + 200,
+                                gw/2 - 450, gh*0.5 + 200)
   love.graphics.setColor(1, 1, 1, 1)
-  love.graphics.printf("Options", 0, gh*0.62, gw, "center")
-  love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
-  love.graphics.rectangle('fill', gw*0.4, gh*0.68, gw*0.2, gh*0.1)
+  love.graphics.printf("Options", 0, gh*0.52 + 100, gw, "center")
+  
+  if (quitButton:getHoverState()) then
+    love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
+  else
+    love.graphics.setColor(0, 0, 0, 0)
+  end
+  love.graphics.polygon('fill', gw/2 - 450, gh*0.5 + 200,
+                                gw/2 + 450, gh*0.5 + 200, 
+                                gw/2 + 450, gh*0.5 + 300,
+                                gw/2 - 450, gh*0.5 + 300)
   love.graphics.setColor(1, 1, 1, 1)
-  love.graphics.printf("Quit", 0, gh*0.72, gw, "center")
+  love.graphics.printf("Quit", 0, gh*0.52 + 200, gw, "center")
 end
 
-function mainmenu:menuButtons()
-  love.graphics.setColor(85 / 255, 105 / 255, 255 / 255, 1)
-  love.graphics.circle("fill", gw/2, gh*0.5, 180)
-  love.graphics.setColor(1, 1, 1, 1)
-  love.graphics.circle("line", gw/2, gh*0.5, 180)
-  love.graphics.printf("Play", gw/2-140, gh*0.5, 140*2, "center")
 
-  love.graphics.setColor(255 / 255, 105 / 255, 145 / 255, 1)
-  love.graphics.circle("fill", gw/2, gh*0.8, 100)
+function mainmenu:optionsButtons()
+  love.graphics.setFont(logoFont)
+  love.graphics.printf("Options", 0, gh*0.22, gw, "center")
+  
+  love.graphics.setFont(titleFont)  
+  
+  if (optionsResolutionButton:getHoverState()) then
+    love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
+  else
+    love.graphics.setColor(0, 0, 0, 0)
+  end
+  love.graphics.polygon('fill', gw/2 - 450, gh*0.5,
+                                gw/2 + 450, gh*0.5, 
+                                gw/2 + 450, gh*0.5 + 100,
+                                gw/2 - 450, gh*0.5 + 100)
   love.graphics.setColor(1, 1, 1, 1)
-  love.graphics.circle("line", gw/2, gh*0.8, 100)
-  love.graphics.printf("Quit", gw/2-140, gh*0.8, 140*2, "center")
-
-  love.graphics.setColor(85 / 255, 255 / 255, 145 / 255, 1)
-  love.graphics.circle("fill", gw*0.38, gh*0.7, 100)
+  love.graphics.printf("Resolution: " .. resolutionList[resolutionIndex[1]] .. "x" .. resolutionList[resolutionIndex[2]], 0, gh*0.52, gw, "center")
+  
+  if (optionsVolumeButton:getHoverState()) then
+    love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
+  else
+    love.graphics.setColor(0, 0, 0, 0)
+  end
+  love.graphics.polygon('fill', gw/2 - 450, gh*0.5 + 100,
+                                gw/2 + 450, gh*0.5 + 100, 
+                                gw/2 + 450, gh*0.5 + 200,
+                                gw/2 - 450, gh*0.5 + 200)
   love.graphics.setColor(1, 1, 1, 1)
-  love.graphics.circle("line", gw*0.38, gh*0.7, 100)
-  love.graphics.printf("Resolution", gw*0.38-140, gh*0.7-10, 140*2, "center")
-  love.graphics.printf("1920x1080", gw*0.38-140, gh*0.7+10, 140*2, "center")
-
-  love.graphics.setColor(85 / 255, 255 / 255, 145 / 255, 1)
-  love.graphics.circle("fill", gw*0.62, gh*0.7, 100)
+  love.graphics.printf("Volume: " .. volumeValue .."%", 0, gh*0.52 + 100, gw, "center")
+  
+  if (optionsBackButton:getHoverState()) then
+    love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
+  else
+    love.graphics.setColor(0, 0, 0, 0)
+  end
+  love.graphics.polygon('fill', gw/2 - 450, gh*0.5 + 200,
+                                gw/2 + 450, gh*0.5 + 200, 
+                                gw/2 + 450, gh*0.5 + 300,
+                                gw/2 - 450, gh*0.5 + 300)
   love.graphics.setColor(1, 1, 1, 1)
-  love.graphics.circle("line", gw*0.62, gh*0.7, 100)
-  love.graphics.printf("Volume", gw*0.62-140, gh*0.7-10, 140*2, "center")
-  love.graphics.printf("100%", gw*0.62-140, gh*0.7+10, 140*2, "center")
+  love.graphics.printf("Back", 0, gh*0.52 + 200, gw, "center")
 end
 
-function mainmenu:quitButton()
-  love.graphics.setColor(85 / 255, 255 / 255, 145 / 255, 1)
-  love.graphics.circle("fill", gw*0.59 - 80, gh*0.625, 70)
+function mainmenu:quitButtons()
+  love.graphics.setFont(titleFont)
+  love.graphics.printf("you really want to quit?", gw/2-450, gh*0.25, 450*2, "center")
+  
+  if (quitYesButton:getHoverState()) then
+    love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
+  else
+    love.graphics.setColor(0, 0, 0, 0)
+  end
+  love.graphics.polygon('fill', gw/2 - 450, gh*0.5,
+                                gw/2 + 450, gh*0.5, 
+                                gw/2 + 450, gh*0.5 + 100,
+                                gw/2 - 450, gh*0.5 + 100)
   love.graphics.setColor(1, 1, 1, 1)
-  love.graphics.circle("line", gw*0.59 - 80, gh*0.625, 70)
-  love.graphics.printf("Yes", gw*0.59-140, gh*0.6, 140*2, "center")
-
-  love.graphics.setColor(255 / 255, 105 / 255, 145 / 255, 1)
-  love.graphics.circle("fill", gw*0.59 + 80, gh*0.625, 70)
+  love.graphics.printf("Yes", 0, gh*0.52, gw, "center")
+  
+  if (quitNoButton:getHoverState()) then
+    love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
+  else
+    love.graphics.setColor(0, 0, 0, 0)
+  end
+  love.graphics.polygon('fill', gw/2 - 450, gh*0.5 + 100,
+                                gw/2 + 450, gh*0.5 + 100, 
+                                gw/2 + 450, gh*0.5 + 200,
+                                gw/2 - 450, gh*0.5 + 200)
   love.graphics.setColor(1, 1, 1, 1)
-  love.graphics.circle("line", gw*0.59 + 80, gh*0.625, 70)
-  love.graphics.printf("No", gw*0.59-140, gh*0.6, 140*2, "center")
+  love.graphics.printf("No", 0, gh*0.52 + 100, gw, "center")
 end
 
-function mainmenu:optionsButton()
-  love.graphics.setColor(85 / 255, 255 / 255, 145 / 255, 1)
-  love.graphics.circle("fill", gw*0.41 - 80, gh*0.625, 70)
+function mainmenu:levels()
+  love.graphics.setFont(levelTitleFont)  
+  if (level1Button:getHoverState()) then
+    love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
+  else
+    love.graphics.setColor(0, 0, 0, 0)
+  end
+  love.graphics.polygon('fill', gw/2 - 320, gh*0.1 - 20,
+                                gw/2 + 320, gh*0.1 - 20, 
+                                gw/2 + 320, gh*0.1 + 120,
+                                gw/2 - 320, gh*0.1 + 120)
+                                love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
+                                love.graphics.polygon('line', gw/2 - 320, gh*0.1 - 20,
+                                                              gw/2 + 320, gh*0.1 - 20, 
+                                                              gw/2 + 320, gh*0.1 + 120,
+                                                              gw/2 - 320, gh*0.1 + 120)
   love.graphics.setColor(1, 1, 1, 1)
-  love.graphics.circle("line", gw*0.41 - 80, gh*0.625, 70)
-  love.graphics.printf("Resolution: 1920x1080", gw*0.425-140, gh*0.6, 140*2, "center")
+  love.graphics.printf("ParagonX9 - Chaoz Airflow", 0, gh*0.1 + 30, gw, "center")
+  love.graphics.printf("Best Time:", gw/2 - 160, gh*0.1 + 70, gw, "left")
+  love.graphics.setFont(levelScoreFont)  
+  love.graphics.printf("123.12", gw/2 + 20, gh*0.1 + 70, gw, "left")
+  
+  love.graphics.setFont(levelTitleFont)  
+  if (level2Button:getHoverState()) then
+    love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
+  else
+    love.graphics.setColor(0, 0, 0, 0)
+  end
+  love.graphics.polygon('fill', gw/2 - 450, gh*0.1 + 120,
+                                gw/2 + 450, gh*0.1 + 120, 
+                                gw/2 + 450, gh*0.1 + 240,
+                                gw/2 - 450, gh*0.1 + 240)
+                                
+                                love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
+                                love.graphics.polygon('line', gw/2 - 420, gh*0.1 + 120,
+                                                              gw/2 + 420, gh*0.1 + 120, 
+                                                              gw/2 + 420, gh*0.1 + 240,
+                                                              gw/2 - 420, gh*0.1 + 240)
+                                
+  love.graphics.setColor(1, 1, 1, 1)
+  love.graphics.printf("Hinkik - Explorers", 0, gh*0.1 + 120 + 30, gw, "center")
+  love.graphics.printf("Best Time:", gw/2 - 160, gh*0.1 + 120 + 70, gw, "left")
+  love.graphics.setFont(levelScoreFont)  
+  love.graphics.printf("123.12", gw/2 + 20, gh*0.1 + 120 + 70, gw, "left")
+  
+  love.graphics.setFont(levelTitleFont)  
+  if (level3Button:getHoverState()) then
+    love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
+  else
+    love.graphics.setColor(0, 0, 0, 0)
+  end
+  love.graphics.polygon('fill', gw/2 - 450, gh*0.1 + 240,
+                                gw/2 + 450, gh*0.1 + 240, 
+                                gw/2 + 450, gh*0.1 + 360,
+                                gw/2 - 450, gh*0.1 + 360)
+                                
+                                love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
+                                love.graphics.polygon('line', gw/2 - 450, gh*0.1 + 240,
+                                                              gw/2 + 450, gh*0.1 + 240, 
+                                                              gw/2 + 450, gh*0.1 + 360,
+                                                              gw/2 - 450, gh*0.1 + 360)
+                                
+  love.graphics.setColor(1, 1, 1, 1)
+  love.graphics.printf("Hinkik - Time Leaper", 0, gh*0.1 + 240 + 30, gw, "center")
+  love.graphics.printf("Best Time:", gw/2 - 160, gh*0.1 + 240 + 70, gw, "left")
+  love.graphics.setFont(levelScoreFont)  
+  love.graphics.printf("123.12", gw/2 + 20, gh*0.1 + 240 + 70, gw, "left")
+  
+  love.graphics.setFont(levelTitleFont)  
+  if (level4Button:getHoverState()) then
+    love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
+  else
+    love.graphics.setColor(0, 0, 0, 0)
+  end
+  love.graphics.polygon('fill', gw/2 - 450, gh*0.1 + 360,
+                                gw/2 + 450, gh*0.1 + 360, 
+                                gw/2 + 450, gh*0.1 + 480,
+                                gw/2 - 450, gh*0.1 + 480)
+                                
+                                love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
+                                love.graphics.polygon('line', gw/2 - 450, gh*0.1 + 360,
+                                                              gw/2 + 450, gh*0.1 + 360, 
+                                                              gw/2 + 450, gh*0.1 + 480,
+                                                              gw/2 - 450, gh*0.1 + 480)
+                                
+  love.graphics.setColor(1, 1, 1, 1)
+  love.graphics.printf("Lchavasse - Lunar Abyss", 0, gh*0.1 + 360 + 30, gw, "center")
+  love.graphics.printf("Best Time:", gw/2 - 160, gh*0.1 + 360 + 70, gw, "left")
+  love.graphics.setFont(levelScoreFont)  
+  love.graphics.printf("123.12", gw/2 + 20, gh*0.1 + 360 + 70, gw, "left")
+  
+  love.graphics.setFont(levelTitleFont)  
+  if (level5Button:getHoverState()) then
+    love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
+  else
+    love.graphics.setColor(0, 0, 0, 0)
+  end
+  love.graphics.polygon('fill', gw/2 - 450, gh*0.1 + 480,
+                                gw/2 + 450, gh*0.1 + 480, 
+                                gw/2 + 450, gh*0.1 + 600,
+                                gw/2 - 450, gh*0.1 + 600)
+                                
+                                love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
+                                love.graphics.polygon('line', gw/2 - 450, gh*0.1 + 480,
+                                                              gw/2 + 450, gh*0.1 + 480, 
+                                                              gw/2 + 450, gh*0.1 + 600,
+                                                              gw/2 - 450, gh*0.1 + 600)
+                                
+  love.graphics.setColor(1, 1, 1, 1)
+  love.graphics.printf("Xtrullor - Supernova", 0, gh*0.1 + 480 + 30, gw, "center")
+  love.graphics.printf("Best Time:", gw/2 - 160, gh*0.1 + 480 + 70, gw, "left")
+  love.graphics.setFont(levelScoreFont)  
+  love.graphics.printf("123.12", gw/2 + 20, gh*0.1 + 480 + 70, gw, "left")
+  
+  love.graphics.setFont(levelTitleFont)  
+  if (level6Button:getHoverState()) then
+    love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
+  else
+    love.graphics.setColor(0, 0, 0, 0)
+  end
+  love.graphics.polygon('fill', gw/2 - 450, gh*0.1 + 600,
+                                gw/2 + 450, gh*0.1 + 600, 
+                                gw/2 + 450, gh*0.1 + 720,
+                                gw/2 - 450, gh*0.1 + 720)
+                                
+                                love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
+                                love.graphics.polygon('line', gw/2 - 420, gh*0.1 + 600,
+                                                              gw/2 + 420, gh*0.1 + 600, 
+                                                              gw/2 + 420, gh*0.1 + 720,
+                                                              gw/2 - 420, gh*0.1 + 720)
+                                
+  love.graphics.setColor(1, 1, 1, 1)
+  love.graphics.printf("Kurototei - Galaxy Collapse", 0, gh*0.1 + 600 + 30, gw, "center")
+  love.graphics.printf("Best Time:", gw/2 - 160, gh*0.1 + 600 + 70, gw, "left")
+  love.graphics.setFont(levelScoreFont)  
+  love.graphics.printf("123.12", gw/2 + 20, gh*0.1 + 600 + 70, gw, "left")
+  
+  love.graphics.setFont(levelTitleFont)  
+  if (levelBackButton:getHoverState()) then
+    love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
+  else
+    love.graphics.setColor(0, 0, 0, 0)
+  end
+  love.graphics.polygon('fill', gw/2 - 450, gh*0.1 + 720,
+                                gw/2 + 450, gh*0.1 + 720, 
+                                gw/2 + 450, gh*0.1 + 880,
+                                gw/2 - 450, gh*0.1 + 880)
+                                
+                                love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
+                                love.graphics.polygon('line', gw/2 - 340, gh*0.1 + 720,
+                                                              gw/2 + 340, gh*0.1 + 720, 
+                                                              gw/2 + 340, gh*0.1 + 880,
+                                                              gw/2 - 340, gh*0.1 + 880)
+                                
+  love.graphics.setColor(1, 1, 1, 1)
+  love.graphics.printf("Back", 0, gh*0.1 + 720 + 60, gw, "center")
 
-  love.graphics.setColor(255 / 255, 105 / 255, 145 / 255, 1)
-  love.graphics.circle("fill", gw*0.425 + 80, gh*0.625, 70)
-  love.graphics.setColor(1, 1, 1, 1)
-  love.graphics.circle("line", gw*0.425 + 80, gh*0.625, 70)
-  love.graphics.printf("Volume: 1.0x", gw*0.425-140, gh*0.6, 140*2, "center")
 end
 
 return mainmenu
