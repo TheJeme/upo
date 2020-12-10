@@ -272,11 +272,9 @@ function mainmenu:levels()
                                 gw/2 + 450+menumusic:getEnergy()*10, 0, 
                                 gw/2 + 450+menumusic:getEnergy()*10, gh*0.1 + 120,
                                 gw/2 - 450-menumusic:getEnergy()*10, gh*0.1 + 120)
-                                love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
-                                love.graphics.polygon('line', gw/2 - 450-menumusic:getEnergy()*10, 0,
-                                                              gw/2 + 450+menumusic:getEnergy()*10, 0, 
-                                                              gw/2 + 450+menumusic:getEnergy()*10, gh*0.1 + 120,
-                                                              gw/2 - 450-menumusic:getEnergy()*10, gh*0.1 + 120)
+  love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
+  love.graphics.line(gw/2 + 330+menumusic:getEnergy()*10, gh*0.1 + 120, gw/2 - 330-menumusic:getEnergy()*10, gh*0.1 + 120)
+  
   love.graphics.setColor(1, 1, 1, 1)
   love.graphics.printf("ParagonX9 - Chaoz Airflow", 0, gh*0.1 + 30, gw, "center")
   love.graphics.setFont(levelScoreFont)
@@ -293,11 +291,8 @@ function mainmenu:levels()
                                 gw/2 + 450+menumusic:getEnergy()*10, gh*0.1 + 240,
                                 gw/2 - 450-menumusic:getEnergy()*10, gh*0.1 + 240)
                                 
-                                love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
-                                love.graphics.polygon('line', gw/2 - 420-menumusic:getEnergy()*10, gh*0.1 + 120,
-                                                              gw/2 + 420+menumusic:getEnergy()*10, gh*0.1 + 120, 
-                                                              gw/2 + 420+menumusic:getEnergy()*10, gh*0.1 + 240,
-                                                              gw/2 - 420-menumusic:getEnergy()*10, gh*0.1 + 240)
+  love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
+  love.graphics.line(gw/2 + 410+menumusic:getEnergy()*10, gh*0.1 + 240, gw/2 - 410-menumusic:getEnergy()*10, gh*0.1 + 240)
                                 
   love.graphics.setColor(1, 1, 1, 1)
   love.graphics.printf("Hinkik - Explorers", 0, gh*0.1 + 120 + 30, gw, "center")
@@ -315,11 +310,9 @@ function mainmenu:levels()
                                 gw/2 + 450+menumusic:getEnergy()*10, gh*0.1 + 360,
                                 gw/2 - 450-menumusic:getEnergy()*10, gh*0.1 + 360)
                                 
-                                love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
-                                love.graphics.polygon('line', gw/2 - 450-menumusic:getEnergy()*10, gh*0.1 + 240,
-                                                              gw/2 + 450+menumusic:getEnergy()*10, gh*0.1 + 240, 
-                                                              gw/2 + 450+menumusic:getEnergy()*10, gh*0.1 + 360,
-                                                              gw/2 - 450-menumusic:getEnergy()*10, gh*0.1 + 360)
+  love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
+  love.graphics.line(gw/2 + 450+menumusic:getEnergy()*10, gh*0.1 + 360, gw/2 - 450-menumusic:getEnergy()*10, gh*0.1 + 360)
+                                                              
                                 
   love.graphics.setColor(1, 1, 1, 1)
   love.graphics.printf("Hinkik - Time Leaper", 0, gh*0.1 + 240 + 30, gw, "center")
@@ -337,12 +330,9 @@ function mainmenu:levels()
                                 gw/2 + 450+menumusic:getEnergy()*10, gh*0.1 + 480,
                                 gw/2 - 450-menumusic:getEnergy()*10, gh*0.1 + 480)
                                 
-                                love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
-                                love.graphics.polygon('line', gw/2 - 450-menumusic:getEnergy()*10, gh*0.1 + 360,
-                                                              gw/2 + 450+menumusic:getEnergy()*10, gh*0.1 + 360, 
-                                                              gw/2 + 450+menumusic:getEnergy()*10, gh*0.1 + 480,
-                                                              gw/2 - 450-menumusic:getEnergy()*10, gh*0.1 + 480)
-                                
+  love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
+  love.graphics.line(gw/2 + 445+menumusic:getEnergy()*10, gh*0.1 + 480, gw/2 - 445-menumusic:getEnergy()*10, gh*0.1 + 480)
+  
   love.graphics.setColor(1, 1, 1, 1)
   love.graphics.printf("Lchavasse - Lunar Abyss", 0, gh*0.1 + 360 + 30, gw, "center")
   love.graphics.setFont(levelScoreFont)
@@ -359,11 +349,8 @@ function mainmenu:levels()
                                 gw/2 + 450+menumusic:getEnergy()*10, gh*0.1 + 600,
                                 gw/2 - 450-menumusic:getEnergy()*10, gh*0.1 + 600)
                                 
-                                love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
-                                love.graphics.polygon('line', gw/2 - 450-menumusic:getEnergy()*10, gh*0.1 + 480,
-                                                              gw/2 + 450+menumusic:getEnergy()*10, gh*0.1 + 480, 
-                                                              gw/2 + 450+menumusic:getEnergy()*10, gh*0.1 + 600,
-                                                              gw/2 - 450-menumusic:getEnergy()*10, gh*0.1 + 600)
+  love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
+  love.graphics.line(gw/2 + 420+menumusic:getEnergy()*10, gh*0.1 + 600, gw/2 - 420-menumusic:getEnergy()*10, gh*0.1 + 600)
                                 
   love.graphics.setColor(1, 1, 1, 1)
   love.graphics.printf("Xtrullor - Supernova", 0, gh*0.1 + 480 + 30, gw, "center")
@@ -381,11 +368,8 @@ function mainmenu:levels()
                                 gw/2 + 450+menumusic:getEnergy()*10, gh*0.1 + 720,
                                 gw/2 - 450-menumusic:getEnergy()*10, gh*0.1 + 720)
                                 
-                                love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
-                                love.graphics.polygon('line', gw/2 - 420-menumusic:getEnergy()*10, gh*0.1 + 600,
-                                                              gw/2 + 420+menumusic:getEnergy()*10, gh*0.1 + 600, 
-                                                              gw/2 + 420+menumusic:getEnergy()*10, gh*0.1 + 720,
-                                                              gw/2 - 420-menumusic:getEnergy()*10, gh*0.1 + 720)
+  love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
+  love.graphics.line(gw/2 + 350+menumusic:getEnergy()*10, gh*0.1 + 720, gw/2 - 350-menumusic:getEnergy()*10, gh*0.1 + 720)
                                 
   love.graphics.setColor(1, 1, 1, 1)
   love.graphics.printf("Kurototei - Galaxy Collapse", 0, gh*0.1 + 600 + 30, gw, "center")
@@ -402,13 +386,7 @@ function mainmenu:levels()
                                 gw/2 + 450+menumusic:getEnergy()*10, gh*0.1 + 720, 
                                 gw/2 + 450+menumusic:getEnergy()*10, gh,
                                 gw/2 - 450-menumusic:getEnergy()*10, gh)
-                                
-                                love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
-                                love.graphics.polygon('line', gw/2 - 450-menumusic:getEnergy()*10, gh*0.1 + 720,
-                                                              gw/2 + 450+menumusic:getEnergy()*10, gh*0.1 + 720, 
-                                                              gw/2 + 450+menumusic:getEnergy()*10, gh,
-                                                              gw/2 - 450-menumusic:getEnergy()*10, gh)
-                                
+                                        
   love.graphics.setColor(1, 1, 1, 1)
   love.graphics.printf("Back", 0, gh*0.1 + 720 + 60, gw, "center")
 

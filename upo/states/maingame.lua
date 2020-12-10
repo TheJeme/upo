@@ -10,7 +10,6 @@ local level1BG = love.graphics.newImage("assets/level01.png")
 local level2BG = love.graphics.newImage("assets/level02.png")
 local level3BG = love.graphics.newImage("assets/level03.png")
 local respawnTime = 0
-local rotation = 0
 local timer
 
 function maingame:load()
@@ -25,17 +24,15 @@ function maingame:update(dt)
     exitButton:update(dt)
   end
   
-  rotation = rotation + dt * 1100 * math.random()
-  
   cursor:update(dt)
   
   if not (isEndGame) then
     circle:update(dt)
     square:update(dt)
     timer = timer + dt
-    if (respawnTime >= 0.18) then
+    if (respawnTime >= 0.18 / timer*20) then
       respawnTime = 0
-      createCircle(rotation, 320)
+      createCircle(320+timer*12)
       --createSquare(0, 220)
     else
       respawnTime = respawnTime + dt

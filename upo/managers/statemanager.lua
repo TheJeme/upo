@@ -47,5 +47,9 @@ function statemanager:changeState(state)
   currentState = state
 end
 
+function statemanager:getState()
+  return currentState
+end
+
 
 return statemanager

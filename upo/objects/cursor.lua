@@ -1,3 +1,5 @@
+cursortrail_array = require 'objects/cursortrail_array'
+
 cursor = {}
 
 local cursorPosX, cursorPosY
@@ -16,13 +18,19 @@ function cursor:update(dt)
     cursorPosX = mx
     cursorPosY = my    
   else
-    cursorPosX = gw/2 + dx/dist*(450-20+menumusic:getEnergy()*10)
-    cursorPosY = gh/2 + dy/dist*(450-20+menumusic:getEnergy()*10)
+    if (statemanager:getState() == "menu") then  
+      cursorPosX = gw/2 + dx/dist*(450-19+menumusic:getEnergy()*10)
+      cursorPosY = gh/2 + dy/dist*(450-19+menumusic:getEnergy()*10)
+    else
+      cursorPosX = gw/2 + dx/dist*(450-18)
+      cursorPosY = gh/2 + dy/dist*(450-18)
+    end
   end
+  cursortrail_array:update(dt, cursorPosX, cursorPosY)
 end
 
 function cursor:draw()
-  
+  cursortrail_array:draw()
   love.graphics.setLineWidth(3)
   love.graphics.setColor(42 / 255, 49 / 255, 61 / 255, 1)
   love.graphics.circle('fill', cursorPosX, cursorPosY, 15, 120)
