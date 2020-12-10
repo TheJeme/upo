@@ -8,7 +8,7 @@ scoreFont = love.graphics.newFont('assets/roboto-thin.ttf', 64)
 levelScoreFont = love.graphics.newFont('assets/roboto-thin.ttf', 34)
 titleFont = love.graphics.newFont('assets/roboto.ttf', 56)
 levelTitleFont = love.graphics.newFont('assets/roboto.ttf', 34)
-logoFont = love.graphics.newFont('assets/roboto.ttf', 152)
+logoFont = love.graphics.newFont('assets/rondalo.ttf', 152)
 
 resolutionIndex = 2
 volumeValue = 5

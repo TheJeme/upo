@@ -15,7 +15,7 @@ function maingame:load()
   particles:load()
   
   restartButton = newButton(gw/2 - 200, gh*0.46 - 50, 400, 150, function() maingame:restart() end)
-  exitButton = newButton(gw/2 - 200, gh*0.57, 400, 150, function() statemanager:changeState("menu") end)
+  exitButton = newButton(gw/2 - 200, gh*0.57, 400, 150, function() maingame:endLevel() end)
 end
 
 function maingame:update(dt)
@@ -98,6 +98,11 @@ end
 
 function maingame:restart()
   isEndGame = false
+end
+
+function maingame:endLevel()
+  statemanager:changeState("menu")
+  menumusic:play()
 end
 
 return maingame

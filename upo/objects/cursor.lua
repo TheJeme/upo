@@ -12,12 +12,12 @@ function cursor:update(dt)
   local dy = my - gh/2
   local dist = math.sqrt(dx^2+dy^2)
   
-  if (dist < (450-12+music:getEnergy()*10)) then
+  if (dist < (450-12+menumusic:getEnergy()*10)) then
     cursorPosX = mx
     cursorPosY = my    
   else
-    cursorPosX = gw/2 + dx/dist*(450-15+music:getEnergy()*10)
-    cursorPosY = gh/2 + dy/dist*(450-15+music:getEnergy()*10)
+    cursorPosX = gw/2 + dx/dist*(450-15+menumusic:getEnergy()*10)
+    cursorPosY = gh/2 + dy/dist*(450-15+menumusic:getEnergy()*10)
   end
 end
 
