@@ -16,8 +16,8 @@ function cursor:update(dt)
     cursorPosX = mx
     cursorPosY = my    
   else
-    cursorPosX = gw/2 + dx/dist*(450-15+menumusic:getEnergy()*10)
-    cursorPosY = gh/2 + dy/dist*(450-15+menumusic:getEnergy()*10)
+    cursorPosX = gw/2 + dx/dist*(450-20+menumusic:getEnergy()*10)
+    cursorPosY = gh/2 + dy/dist*(450-20+menumusic:getEnergy()*10)
   end
 end
 

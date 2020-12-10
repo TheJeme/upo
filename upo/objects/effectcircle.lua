@@ -27,8 +27,8 @@ function effectcircle:draw()
 end
 
 function effectcircle:clearCircleEffects()
-  for i in ipairs(listOfCircleEffects) do
-    table.remove(listOfCircleEffects, i)
+  for i in pairs(listOfCircleEffects) do
+    listOfCircleEffects[i] = nil
   end
 end
 

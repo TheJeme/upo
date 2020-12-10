@@ -35,22 +35,22 @@ function mainmenu:load()
   optionsVolumeButton = newButton(gw/2 - 450-menumusic:getEnergy()*10, gh*0.5 + 100, 900, 100, function() mainmenu:changeVolume(5) end, function() mainmenu:changeVolume(-5) end)
   optionsBackButton = newButton(gw/2 - 450-menumusic:getEnergy()*10, gh*0.5 + 200, 900, 100, function() menustate = "main" mainmenu:saveSettings() end)
   
-  level1Button = newButton(gw/2 - 450-menumusic:getEnergy()*10, gh*0.1 - 20, 900, 140, function() mainmenu:startLevel() end)
-  level2Button = newButton(gw/2 - 450-menumusic:getEnergy()*10, gh*0.1 + 120, 900, 120, function() mainmenu:startLevel() end)
-  level3Button = newButton(gw/2 - 450-menumusic:getEnergy()*10, gh*0.1 + 240, 900, 120, function() mainmenu:startLevel() end)
-  level4Button = newButton(gw/2 - 450-menumusic:getEnergy()*10, gh*0.1 + 360, 900, 120, function() mainmenu:startLevel() end)
-  level5Button = newButton(gw/2 - 450-menumusic:getEnergy()*10, gh*0.1 + 480, 900, 120, function() mainmenu:startLevel() end)
-  level6Button = newButton(gw/2 - 450-menumusic:getEnergy()*10, gh*0.1 + 600, 900, 120, function() mainmenu:startLevel() end)
+  level1Button = newButton(gw/2 - 450-menumusic:getEnergy()*10, gh*0.1 - 20, 900, 140, function() mainmenu:startLevel(1) end)
+  level2Button = newButton(gw/2 - 450-menumusic:getEnergy()*10, gh*0.1 + 120, 900, 120, function() mainmenu:startLevel(2) end)
+  level3Button = newButton(gw/2 - 450-menumusic:getEnergy()*10, gh*0.1 + 240, 900, 120, function() mainmenu:startLevel(3) end)
+  level4Button = newButton(gw/2 - 450-menumusic:getEnergy()*10, gh*0.1 + 360, 900, 120, function() mainmenu:startLevel(4) end)
+  level5Button = newButton(gw/2 - 450-menumusic:getEnergy()*10, gh*0.1 + 480, 900, 120, function() mainmenu:startLevel(5) end)
+  level6Button = newButton(gw/2 - 450-menumusic:getEnergy()*10, gh*0.1 + 600, 900, 120, function() mainmenu:startLevel(6) end)
   
   levelBackButton = newButton(gw/2 - 450-menumusic:getEnergy()*10, gh*0.1 + 720, 900, 160, function() menustate = "main" end)
 end
 
-function mainmenu:startLevel()
-  statemanager:changeState("game") 
-  maingame:restart()
+function mainmenu:startLevel(levelIndex)
   menumusic:stop()
   effectcircle:clearCircleEffects()
   menuparticles:clearParticles() 
+  statemanager:changeState("game") 
+  maingame:loadLevel(levelIndex)
 end
 
 function mainmenu:saveSettings()

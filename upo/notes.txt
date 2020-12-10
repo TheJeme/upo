@@ -1,0 +1,6 @@
+Chaoz Airflow - (normal)
+Explorers (reverse, ball stays on edges)
+Time Leaper - (ball goes bigger/smaller and you have to collect things so it goes back to normal)
+Lunar Abyss - (small area)
+Supernova - (flashlight)
+Galaxy Collapse - (just super hard)

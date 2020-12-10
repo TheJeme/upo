@@ -13,9 +13,8 @@ end
 function circle:update(dt)
   for i, v in ipairs(listOfCircles) do
     v.position = v.position + v.speed * dt
-    
     if (math.abs(v.position) > 2000) then
-      --TODO this fix
+      table.remove(listOfCircles, i)
     end
   end
 end
@@ -25,14 +24,16 @@ function circle:draw()
       love.graphics.push()
       love.graphics.translate(gw / 2, gh / 2)
       love.graphics.rotate(v.rotation)
-      love.graphics.setColor(245 / 255, 85 / 255, 109 / 255, 1)
-      --love.graphics.setColor(245 / 255, 220 / 255, 85 / 255, 1)
-      --love.graphics.setColor(109 / 255, 245 / 255, 85 / 255, 1)
+      love.graphics.setColor(28 / 255, 31 / 255, 39 / 255, 1)
       love.graphics.circle("fill", v.position, 0, 45)
-      love.graphics.setColor(1, 1, 1, 1)
-      love.graphics.circle("line", v.position, 0, 45)
       love.graphics.pop()
     end
+end
+
+function circle:clear()
+  for i, v in ipairs(listOfCircles) do
+    listOfCircles[i] = nil
+  end
 end
 
 return circle

@@ -39,8 +39,8 @@ function menuparticles:draw()
 end
 
 function menuparticles:clearParticles()
-  for i in ipairs(listOfMenuParticles) do
-    table.remove(listOfMenuParticles, i)
+  for i in pairs(listOfMenuParticles) do
+    listOfMenuParticles[i] = nil
   end
 end
 

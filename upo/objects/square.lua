@@ -15,7 +15,7 @@ function square:update(dt)
     v.position = v.position + v.speed * dt
     
     if (math.abs(v.position) > 2000) then
-      --TODO this fix
+      table.remove(listOfSquares, i)
     end
   end
 end
