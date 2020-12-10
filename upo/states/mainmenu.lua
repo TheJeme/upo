@@ -1,39 +1,55 @@
 require 'objects/cursor'
 require 'objects/button'
 
+local effectcircle = require 'objects/effectcircle'
+local audio = require "lib/wave"
+
 mainmenu = {}
 
-local resolutionIndex, volumeValue
 
 function mainmenu:load()
-  resolutionIndex = 2
-  volumeValue = 100
   cursor:load()
   menustate = "main"
   
-  playButton = newButton(gw/2 - 450, gh*0.5, 900, 100, function() menustate = "levels" end)
-  optionsButton = newButton(gw/2 - 450, gh*0.5 + 100, 900, 100, function() menustate = "options" end)
-  quitButton = newButton(gw/2 - 450, gh*0.5 + 200, 900, 100, function() menustate = "quit" end)
+  music = audio:newSource("songs/Hinkik - Ena.mp3", "stream")
+  music:parse()
+  music:setIntensity(20)
+  music:setBPM(64)
+  music:setVolume(volumeValue * 0.01)
+  music:setLooping(true)
+  music:play()
+  menuTheme = love.audio.newSource("songs/Hinkik - Ena.mp3", "stream")
+  menuTheme:setVolume(volumeValue * 0.01)
+  --menuTheme:play()
+  music:onBeat(function()
+    newCircleEffect(450+music:getEnergy()*10, 190)
+  end)
   
-  quitYesButton = newButton(gw/2 - 450, gh*0.5, 900, 100, function() love.event.quit() end)
-  quitNoButton = newButton(gw/2 - 450, gh*0.5 + 100, 900, 100, function() menustate = "main" end)
+  playButton = newButton(gw/2 - 450-music:getEnergy()*10, gh*0.5, 900, 100, function() menustate = "levels" end)
+  optionsButton = newButton(gw/2 - 450-music:getEnergy()*10, gh*0.5 + 100, 900, 100, function() menustate = "options" end)
+  quitButton = newButton(gw/2 - 450-music:getEnergy()*10, gh*0.5 + 200, 900, 100, function() menustate = "quit" end)
   
-  optionsResolutionButton = newButton(gw/2 - 450, gh*0.5, 900, 100, function() resolutionIndex = resolutionIndex + 1 end, function() resolutionIndex = resolutionIndex - 1 end)
-  optionsVolumeButton = newButton(gw/2 - 450, gh*0.5 + 100, 900, 100, function() volumeValue = volumeValue + 5 end, function() volumeValue = volumeValue - 5 end)
-  optionsBackButton = newButton(gw/2 - 450, gh*0.5 + 200, 900, 100, function() menustate = "main" end)
+  quitYesButton = newButton(gw/2 - 450-music:getEnergy()*10, gh*0.5, 900, 100, function() love.event.quit() end)
+  quitNoButton = newButton(gw/2 - 450-music:getEnergy()*10, gh*0.5 + 100, 900, 100, function() menustate = "main" end)
   
-  level1Button = newButton(gw/2 - 450, gh*0.1 - 20, 900, 140, function() statemanager:changeState("game") maingame:restart() end)
-  level2Button = newButton(gw/2 - 450, gh*0.1 + 120, 900, 120, function() statemanager:changeState("game") maingame:restart() end)
-  level3Button = newButton(gw/2 - 450, gh*0.1 + 240, 900, 120, function() statemanager:changeState("game") maingame:restart() end)
-  level4Button = newButton(gw/2 - 450, gh*0.1 + 360, 900, 120, function() statemanager:changeState("game") maingame:restart() end)
-  level5Button = newButton(gw/2 - 450, gh*0.1 + 480, 900, 120, function() statemanager:changeState("game") maingame:restart() end)
-  level6Button = newButton(gw/2 - 450, gh*0.1 + 600, 900, 120, function() statemanager:changeState("game") maingame:restart() end)
+  optionsResolutionButton = newButton(gw/2 - 450-music:getEnergy()*10, gh*0.5, 900, 100, function() mainmenu:changeResolution(1) end, function() mainmenu:changeResolution(-1) end)
+  optionsVolumeButton = newButton(gw/2 - 450-music:getEnergy()*10, gh*0.5 + 100, 900, 100, function() mainmenu:changeVolume(5) end, function() mainmenu:changeVolume(-5) end)
+  optionsBackButton = newButton(gw/2 - 450-music:getEnergy()*10, gh*0.5 + 200, 900, 100, function() menustate = "main" end)
   
-  levelBackButton = newButton(gw/2 - 450, gh*0.1 + 720, 900, 160, function() menustate = "main" end)
+  level1Button = newButton(gw/2 - 450-music:getEnergy()*10, gh*0.1 - 20, 900, 140, function() statemanager:changeState("game") maingame:restart() end)
+  level2Button = newButton(gw/2 - 450-music:getEnergy()*10, gh*0.1 + 120, 900, 120, function() statemanager:changeState("game") maingame:restart() end)
+  level3Button = newButton(gw/2 - 450-music:getEnergy()*10, gh*0.1 + 240, 900, 120, function() statemanager:changeState("game") maingame:restart() end)
+  level4Button = newButton(gw/2 - 450-music:getEnergy()*10, gh*0.1 + 360, 900, 120, function() statemanager:changeState("game") maingame:restart() end)
+  level5Button = newButton(gw/2 - 450-music:getEnergy()*10, gh*0.1 + 480, 900, 120, function() statemanager:changeState("game") maingame:restart() end)
+  level6Button = newButton(gw/2 - 450-music:getEnergy()*10, gh*0.1 + 600, 900, 120, function() statemanager:changeState("game") maingame:restart() end)
+  
+  levelBackButton = newButton(gw/2 - 450-music:getEnergy()*10, gh*0.1 + 720, 900, 160, function() menustate = "main" end)
 end
 
 function mainmenu:update(dt)
   cursor:update(dt)
+  effectcircle:update(dt) 
+  music:update(dt)
   
   if (menustate == "main") then
     playButton:update(dt)
@@ -60,9 +76,9 @@ end
 function mainmenu:draw()  
   love.graphics.setBackgroundColor(25 / 255, 25 / 255, 25 / 255, 1)
   love.graphics.setColor(85 / 255, 105 / 255, 145 / 255, 1)
-  love.graphics.circle("fill", gw/2, gh/2, 450)
+  love.graphics.circle("fill", gw/2, gh/2, 450+music:getEnergy()*10)
+  effectcircle:draw()
   love.graphics.setColor(1, 1, 1, 1)
-  
   if(menustate == "main") then    
     mainmenu:mainButtons()
   elseif(menustate == "options") then   
@@ -74,7 +90,7 @@ function mainmenu:draw()
   end
   
   love.graphics.setLineWidth(5)
-  love.graphics.circle("line", gw/2, gh/2, 450)
+  love.graphics.circle("line", gw/2, gh/2, 450+music:getEnergy()*10)
   cursor:draw()
 end
 
@@ -124,10 +140,10 @@ function mainmenu:mainButtons()
   else
     love.graphics.setColor(0, 0, 0, 0)
   end
-  love.graphics.polygon('fill', gw/2 - 450, gh*0.5,
-                                gw/2 + 450, gh*0.5, 
-                                gw/2 + 450, gh*0.5 + 100,
-                                gw/2 - 450, gh*0.5 + 100)
+  love.graphics.polygon('fill', gw/2 - 450-music:getEnergy()*10, gh*0.5,
+                                gw/2 + 450+music:getEnergy()*10, gh*0.5, 
+                                gw/2 + 450+music:getEnergy()*10, gh*0.5 + 100,
+                                gw/2 - 450-music:getEnergy()*10, gh*0.5 + 100)
   love.graphics.setColor(1, 1, 1, 1)
   love.graphics.printf("Play", 0, gh*0.52, gw, "center")
   
@@ -136,10 +152,10 @@ function mainmenu:mainButtons()
   else
     love.graphics.setColor(0, 0, 0, 0)
   end
-  love.graphics.polygon('fill', gw/2 - 450, gh*0.5 + 100,
-                                gw/2 + 450, gh*0.5 + 100, 
-                                gw/2 + 450, gh*0.5 + 200,
-                                gw/2 - 450, gh*0.5 + 200)
+  love.graphics.polygon('fill', gw/2 - 450-music:getEnergy()*10, gh*0.5 + 100,
+                                gw/2 + 450+music:getEnergy()*10, gh*0.5 + 100, 
+                                gw/2 + 450+music:getEnergy()*10, gh*0.5 + 200,
+                                gw/2 - 450-music:getEnergy()*10, gh*0.5 + 200)
   love.graphics.setColor(1, 1, 1, 1)
   love.graphics.printf("Options", 0, gh*0.52 + 100, gw, "center")
   
@@ -148,10 +164,10 @@ function mainmenu:mainButtons()
   else
     love.graphics.setColor(0, 0, 0, 0)
   end
-  love.graphics.polygon('fill', gw/2 - 450, gh*0.5 + 200,
-                                gw/2 + 450, gh*0.5 + 200, 
-                                gw/2 + 450, gh*0.5 + 300,
-                                gw/2 - 450, gh*0.5 + 300)
+  love.graphics.polygon('fill', gw/2 - 450-music:getEnergy()*10, gh*0.5 + 200,
+                                gw/2 + 450+music:getEnergy()*10, gh*0.5 + 200, 
+                                gw/2 + 450+music:getEnergy()*10, gh*0.5 + 300,
+                                gw/2 - 450-music:getEnergy()*10, gh*0.5 + 300)
   love.graphics.setColor(1, 1, 1, 1)
   love.graphics.printf("Quit", 0, gh*0.52 + 200, gw, "center")
 end
@@ -168,22 +184,22 @@ function mainmenu:optionsButtons()
   else
     love.graphics.setColor(0, 0, 0, 0)
   end
-  love.graphics.polygon('fill', gw/2 - 450, gh*0.5,
-                                gw/2 + 450, gh*0.5, 
-                                gw/2 + 450, gh*0.5 + 100,
-                                gw/2 - 450, gh*0.5 + 100)
+  love.graphics.polygon('fill', gw/2 - 450-music:getEnergy()*10, gh*0.5,
+                                gw/2 + 450+music:getEnergy()*10, gh*0.5, 
+                                gw/2 + 450+music:getEnergy()*10, gh*0.5 + 100,
+                                gw/2 - 450-music:getEnergy()*10, gh*0.5 + 100)
   love.graphics.setColor(1, 1, 1, 1)
-  love.graphics.printf("Resolution: " .. resolutionList[resolutionIndex[1]] .. "x" .. resolutionList[resolutionIndex[2]], 0, gh*0.52, gw, "center")
+  love.graphics.printf("Resolution: " .. resolutionList[resolutionIndex][1] .. "x" .. resolutionList[resolutionIndex][2], 0, gh*0.52, gw, "center")
   
   if (optionsVolumeButton:getHoverState()) then
     love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
   else
     love.graphics.setColor(0, 0, 0, 0)
   end
-  love.graphics.polygon('fill', gw/2 - 450, gh*0.5 + 100,
-                                gw/2 + 450, gh*0.5 + 100, 
-                                gw/2 + 450, gh*0.5 + 200,
-                                gw/2 - 450, gh*0.5 + 200)
+  love.graphics.polygon('fill', gw/2 - 450-music:getEnergy()*10-music:getEnergy()*10, gh*0.5 + 100,
+                                gw/2 + 450+music:getEnergy()*10-music:getEnergy()*10, gh*0.5 + 100, 
+                                gw/2 + 450+music:getEnergy()*10+music:getEnergy()*10, gh*0.5 + 200,
+                                gw/2 - 450-music:getEnergy()*10+music:getEnergy()*10, gh*0.5 + 200)
   love.graphics.setColor(1, 1, 1, 1)
   love.graphics.printf("Volume: " .. volumeValue .."%", 0, gh*0.52 + 100, gw, "center")
   
@@ -192,10 +208,10 @@ function mainmenu:optionsButtons()
   else
     love.graphics.setColor(0, 0, 0, 0)
   end
-  love.graphics.polygon('fill', gw/2 - 450, gh*0.5 + 200,
-                                gw/2 + 450, gh*0.5 + 200, 
-                                gw/2 + 450, gh*0.5 + 300,
-                                gw/2 - 450, gh*0.5 + 300)
+  love.graphics.polygon('fill', gw/2 - 450-music:getEnergy()*10, gh*0.5 + 200,
+                                gw/2 + 450+music:getEnergy()*10, gh*0.5 + 200, 
+                                gw/2 + 450+music:getEnergy()*10, gh*0.5 + 300,
+                                gw/2 - 450-music:getEnergy()*10, gh*0.5 + 300)
   love.graphics.setColor(1, 1, 1, 1)
   love.graphics.printf("Back", 0, gh*0.52 + 200, gw, "center")
 end
@@ -209,10 +225,10 @@ function mainmenu:quitButtons()
   else
     love.graphics.setColor(0, 0, 0, 0)
   end
-  love.graphics.polygon('fill', gw/2 - 450, gh*0.5,
-                                gw/2 + 450, gh*0.5, 
-                                gw/2 + 450, gh*0.5 + 100,
-                                gw/2 - 450, gh*0.5 + 100)
+  love.graphics.polygon('fill', gw/2 - 450-music:getEnergy()*10, gh*0.5,
+                                gw/2 + 450+music:getEnergy()*10, gh*0.5, 
+                                gw/2 + 450+music:getEnergy()*10, gh*0.5 + 100,
+                                gw/2 - 450-music:getEnergy()*10, gh*0.5 + 100)
   love.graphics.setColor(1, 1, 1, 1)
   love.graphics.printf("Yes", 0, gh*0.52, gw, "center")
   
@@ -221,10 +237,10 @@ function mainmenu:quitButtons()
   else
     love.graphics.setColor(0, 0, 0, 0)
   end
-  love.graphics.polygon('fill', gw/2 - 450, gh*0.5 + 100,
-                                gw/2 + 450, gh*0.5 + 100, 
-                                gw/2 + 450, gh*0.5 + 200,
-                                gw/2 - 450, gh*0.5 + 200)
+  love.graphics.polygon('fill', gw/2 - 450-music:getEnergy()*10, gh*0.5 + 100,
+                                gw/2 + 450+music:getEnergy()*10, gh*0.5 + 100, 
+                                gw/2 + 450+music:getEnergy()*10, gh*0.5 + 200,
+                                gw/2 - 450-music:getEnergy()*10, gh*0.5 + 200)
   love.graphics.setColor(1, 1, 1, 1)
   love.graphics.printf("No", 0, gh*0.52 + 100, gw, "center")
 end
@@ -236,15 +252,15 @@ function mainmenu:levels()
   else
     love.graphics.setColor(0, 0, 0, 0)
   end
-  love.graphics.polygon('fill', gw/2 - 320, gh*0.1 - 20,
-                                gw/2 + 320, gh*0.1 - 20, 
-                                gw/2 + 320, gh*0.1 + 120,
-                                gw/2 - 320, gh*0.1 + 120)
+  love.graphics.polygon('fill', gw/2 - 320-music:getEnergy()*10, 0,
+                                gw/2 + 320+music:getEnergy()*10, 0, 
+                                gw/2 + 320+music:getEnergy()*10, gh*0.1 + 120,
+                                gw/2 - 320-music:getEnergy()*10, gh*0.1 + 120)
                                 love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
-                                love.graphics.polygon('line', gw/2 - 320, gh*0.1 - 20,
-                                                              gw/2 + 320, gh*0.1 - 20, 
-                                                              gw/2 + 320, gh*0.1 + 120,
-                                                              gw/2 - 320, gh*0.1 + 120)
+                                love.graphics.polygon('line', gw/2 - 320-music:getEnergy()*10, 0,
+                                                              gw/2 + 320+music:getEnergy()*10, 0, 
+                                                              gw/2 + 320+music:getEnergy()*10, gh*0.1 + 120,
+                                                              gw/2 - 320-music:getEnergy()*10, gh*0.1 + 120)
   love.graphics.setColor(1, 1, 1, 1)
   love.graphics.printf("ParagonX9 - Chaoz Airflow", 0, gh*0.1 + 30, gw, "center")
   love.graphics.printf("Best Time:", gw/2 - 160, gh*0.1 + 70, gw, "left")
@@ -257,16 +273,16 @@ function mainmenu:levels()
   else
     love.graphics.setColor(0, 0, 0, 0)
   end
-  love.graphics.polygon('fill', gw/2 - 450, gh*0.1 + 120,
-                                gw/2 + 450, gh*0.1 + 120, 
-                                gw/2 + 450, gh*0.1 + 240,
-                                gw/2 - 450, gh*0.1 + 240)
+  love.graphics.polygon('fill', gw/2 - 450-music:getEnergy()*10, gh*0.1 + 120,
+                                gw/2 + 450+music:getEnergy()*10, gh*0.1 + 120, 
+                                gw/2 + 450+music:getEnergy()*10, gh*0.1 + 240,
+                                gw/2 - 450-music:getEnergy()*10, gh*0.1 + 240)
                                 
                                 love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
-                                love.graphics.polygon('line', gw/2 - 420, gh*0.1 + 120,
-                                                              gw/2 + 420, gh*0.1 + 120, 
-                                                              gw/2 + 420, gh*0.1 + 240,
-                                                              gw/2 - 420, gh*0.1 + 240)
+                                love.graphics.polygon('line', gw/2 - 420-music:getEnergy()*10, gh*0.1 + 120,
+                                                              gw/2 + 420+music:getEnergy()*10, gh*0.1 + 120, 
+                                                              gw/2 + 420+music:getEnergy()*10, gh*0.1 + 240,
+                                                              gw/2 - 420-music:getEnergy()*10, gh*0.1 + 240)
                                 
   love.graphics.setColor(1, 1, 1, 1)
   love.graphics.printf("Hinkik - Explorers", 0, gh*0.1 + 120 + 30, gw, "center")
@@ -280,16 +296,16 @@ function mainmenu:levels()
   else
     love.graphics.setColor(0, 0, 0, 0)
   end
-  love.graphics.polygon('fill', gw/2 - 450, gh*0.1 + 240,
-                                gw/2 + 450, gh*0.1 + 240, 
-                                gw/2 + 450, gh*0.1 + 360,
-                                gw/2 - 450, gh*0.1 + 360)
+  love.graphics.polygon('fill', gw/2 - 450-music:getEnergy()*10, gh*0.1 + 240,
+                                gw/2 + 450+music:getEnergy()*10, gh*0.1 + 240, 
+                                gw/2 + 450+music:getEnergy()*10, gh*0.1 + 360,
+                                gw/2 - 450-music:getEnergy()*10, gh*0.1 + 360)
                                 
                                 love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
-                                love.graphics.polygon('line', gw/2 - 450, gh*0.1 + 240,
-                                                              gw/2 + 450, gh*0.1 + 240, 
-                                                              gw/2 + 450, gh*0.1 + 360,
-                                                              gw/2 - 450, gh*0.1 + 360)
+                                love.graphics.polygon('line', gw/2 - 450-music:getEnergy()*10, gh*0.1 + 240,
+                                                              gw/2 + 450+music:getEnergy()*10, gh*0.1 + 240, 
+                                                              gw/2 + 450+music:getEnergy()*10, gh*0.1 + 360,
+                                                              gw/2 - 450-music:getEnergy()*10, gh*0.1 + 360)
                                 
   love.graphics.setColor(1, 1, 1, 1)
   love.graphics.printf("Hinkik - Time Leaper", 0, gh*0.1 + 240 + 30, gw, "center")
@@ -303,16 +319,16 @@ function mainmenu:levels()
   else
     love.graphics.setColor(0, 0, 0, 0)
   end
-  love.graphics.polygon('fill', gw/2 - 450, gh*0.1 + 360,
-                                gw/2 + 450, gh*0.1 + 360, 
-                                gw/2 + 450, gh*0.1 + 480,
-                                gw/2 - 450, gh*0.1 + 480)
+  love.graphics.polygon('fill', gw/2 - 450-music:getEnergy()*10, gh*0.1 + 360,
+                                gw/2 + 450+music:getEnergy()*10, gh*0.1 + 360, 
+                                gw/2 + 450+music:getEnergy()*10, gh*0.1 + 480,
+                                gw/2 - 450-music:getEnergy()*10, gh*0.1 + 480)
                                 
                                 love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
-                                love.graphics.polygon('line', gw/2 - 450, gh*0.1 + 360,
-                                                              gw/2 + 450, gh*0.1 + 360, 
-                                                              gw/2 + 450, gh*0.1 + 480,
-                                                              gw/2 - 450, gh*0.1 + 480)
+                                love.graphics.polygon('line', gw/2 - 450-music:getEnergy()*10, gh*0.1 + 360,
+                                                              gw/2 + 450+music:getEnergy()*10, gh*0.1 + 360, 
+                                                              gw/2 + 450+music:getEnergy()*10, gh*0.1 + 480,
+                                                              gw/2 - 450-music:getEnergy()*10, gh*0.1 + 480)
                                 
   love.graphics.setColor(1, 1, 1, 1)
   love.graphics.printf("Lchavasse - Lunar Abyss", 0, gh*0.1 + 360 + 30, gw, "center")
@@ -326,16 +342,16 @@ function mainmenu:levels()
   else
     love.graphics.setColor(0, 0, 0, 0)
   end
-  love.graphics.polygon('fill', gw/2 - 450, gh*0.1 + 480,
-                                gw/2 + 450, gh*0.1 + 480, 
-                                gw/2 + 450, gh*0.1 + 600,
-                                gw/2 - 450, gh*0.1 + 600)
+  love.graphics.polygon('fill', gw/2 - 450-music:getEnergy()*10, gh*0.1 + 480,
+                                gw/2 + 450+music:getEnergy()*10, gh*0.1 + 480, 
+                                gw/2 + 450+music:getEnergy()*10, gh*0.1 + 600,
+                                gw/2 - 450-music:getEnergy()*10, gh*0.1 + 600)
                                 
                                 love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
-                                love.graphics.polygon('line', gw/2 - 450, gh*0.1 + 480,
-                                                              gw/2 + 450, gh*0.1 + 480, 
-                                                              gw/2 + 450, gh*0.1 + 600,
-                                                              gw/2 - 450, gh*0.1 + 600)
+                                love.graphics.polygon('line', gw/2 - 450-music:getEnergy()*10, gh*0.1 + 480,
+                                                              gw/2 + 450+music:getEnergy()*10, gh*0.1 + 480, 
+                                                              gw/2 + 450+music:getEnergy()*10, gh*0.1 + 600,
+                                                              gw/2 - 450-music:getEnergy()*10, gh*0.1 + 600)
                                 
   love.graphics.setColor(1, 1, 1, 1)
   love.graphics.printf("Xtrullor - Supernova", 0, gh*0.1 + 480 + 30, gw, "center")
@@ -349,16 +365,16 @@ function mainmenu:levels()
   else
     love.graphics.setColor(0, 0, 0, 0)
   end
-  love.graphics.polygon('fill', gw/2 - 450, gh*0.1 + 600,
-                                gw/2 + 450, gh*0.1 + 600, 
-                                gw/2 + 450, gh*0.1 + 720,
-                                gw/2 - 450, gh*0.1 + 720)
+  love.graphics.polygon('fill', gw/2 - 450-music:getEnergy()*10, gh*0.1 + 600,
+                                gw/2 + 450+music:getEnergy()*10, gh*0.1 + 600, 
+                                gw/2 + 450+music:getEnergy()*10, gh*0.1 + 720,
+                                gw/2 - 450-music:getEnergy()*10, gh*0.1 + 720)
                                 
                                 love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
-                                love.graphics.polygon('line', gw/2 - 420, gh*0.1 + 600,
-                                                              gw/2 + 420, gh*0.1 + 600, 
-                                                              gw/2 + 420, gh*0.1 + 720,
-                                                              gw/2 - 420, gh*0.1 + 720)
+                                love.graphics.polygon('line', gw/2 - 420-music:getEnergy()*10, gh*0.1 + 600,
+                                                              gw/2 + 420+music:getEnergy()*10, gh*0.1 + 600, 
+                                                              gw/2 + 420+music:getEnergy()*10, gh*0.1 + 720,
+                                                              gw/2 - 420-music:getEnergy()*10, gh*0.1 + 720)
                                 
   love.graphics.setColor(1, 1, 1, 1)
   love.graphics.printf("Kurototei - Galaxy Collapse", 0, gh*0.1 + 600 + 30, gw, "center")
@@ -372,20 +388,39 @@ function mainmenu:levels()
   else
     love.graphics.setColor(0, 0, 0, 0)
   end
-  love.graphics.polygon('fill', gw/2 - 450, gh*0.1 + 720,
-                                gw/2 + 450, gh*0.1 + 720, 
-                                gw/2 + 450, gh*0.1 + 880,
-                                gw/2 - 450, gh*0.1 + 880)
+  love.graphics.polygon('fill', gw/2 - 450-music:getEnergy()*10, gh*0.1 + 720,
+                                gw/2 + 450+music:getEnergy()*10, gh*0.1 + 720, 
+                                gw/2 + 450+music:getEnergy()*10, gh,
+                                gw/2 - 450-music:getEnergy()*10, gh)
                                 
                                 love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
-                                love.graphics.polygon('line', gw/2 - 340, gh*0.1 + 720,
-                                                              gw/2 + 340, gh*0.1 + 720, 
-                                                              gw/2 + 340, gh*0.1 + 880,
-                                                              gw/2 - 340, gh*0.1 + 880)
+                                love.graphics.polygon('line', gw/2 - 340-music:getEnergy()*10, gh*0.1 + 720,
+                                                              gw/2 + 340+music:getEnergy()*10, gh*0.1 + 720, 
+                                                              gw/2 + 340+music:getEnergy()*10, gh,
+                                                              gw/2 - 340-music:getEnergy()*10, gh)
                                 
   love.graphics.setColor(1, 1, 1, 1)
   love.graphics.printf("Back", 0, gh*0.1 + 720 + 60, gw, "center")
 
+end
+
+function mainmenu:changeResolution(value)
+  resolutionIndex = resolutionIndex + value
+  if (resolutionIndex < 1) then
+    resolutionIndex = #resolutionList
+  elseif (resolutionIndex > #resolutionList) then
+    resolutionIndex = 1
+  end
+end
+
+function mainmenu:changeVolume(value)
+  volumeValue = volumeValue + value
+  if (volumeValue < 0) then
+    volumeValue = 100
+  elseif (volumeValue > 100) then
+    volumeValue = 0
+  end
+  menuTheme:setVolume(volumeValue * 0.01)
 end
 
 return mainmenu

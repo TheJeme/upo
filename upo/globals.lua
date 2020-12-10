@@ -10,6 +10,8 @@ titleFont = love.graphics.newFont('assets/roboto.ttf', 56)
 levelTitleFont = love.graphics.newFont('assets/roboto.ttf', 34)
 logoFont = love.graphics.newFont('assets/roboto.ttf', 152)
 
+resolutionIndex = 2
+volumeValue = 5
 resolutionList = {
                   {2560, 1440},
                   {1920, 1080},
