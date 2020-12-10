@@ -38,8 +38,8 @@ function menuparticles:draw()
   end
 end
 
-function menuparticles:clearCircleEffects()
-  for i, v in ipairs(listOfMenuParticles) do
+function menuparticles:clearParticles()
+  for i in ipairs(listOfMenuParticles) do
     table.remove(listOfMenuParticles, i)
   end
 end

@@ -41,12 +41,11 @@ function maingame:update(dt)
 end
 
 function maingame:draw()  
-  love.graphics.setColor(0.2, 0.2, 0.2, 1)
+  love.graphics.setColor(58 / 255, 65 / 255, 81 / 255, 1)
   love.graphics.circle("fill", gw / 2, gh / 2, 450)
 
   love.graphics.setColor(1, 1, 1, 1)
   love.graphics.setLineWidth(2)
-  --love.graphics.circle("line", gw / 2, gh / 2, 25)
   love.graphics.setFont(scoreFont)
   love.graphics.printf("123.54", 0, gh*0.2, gw, "center")
   --circle:draw()

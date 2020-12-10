@@ -24,7 +24,7 @@ end
 function cursor:draw()
   
   love.graphics.setLineWidth(3)
-  love.graphics.setColor(86 / 255, 155 / 255, 222 / 255, 1)
+  love.graphics.setColor(42 / 255, 49 / 255, 61 / 255, 1)
   love.graphics.circle('fill', cursorPosX, cursorPosY, 15, 120)
   love.graphics.setColor(1, 1, 1, 1)
   love.graphics.circle('line', cursorPosX, cursorPosY, 15, 120)
