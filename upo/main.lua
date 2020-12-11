@@ -9,7 +9,7 @@ require 'managers/gamemanager'
 
 function love.load()
   math.randomseed(os.time())
-  simpleScale.setWindow(gw, gh, 1920, 1080)
+  simpleScale.setWindow(gw, gh, resolutionList[3][1], resolutionList[3][2])
   love.window.setVSync(0)
   beloved:load()
   statemanager:load()
