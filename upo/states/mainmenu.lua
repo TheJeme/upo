@@ -9,7 +9,6 @@ mainmenu = {}
 
 
 function mainmenu:load()
-  cursor:load()
   menustate = "main"
 
   menumusic = audio:newSource("songs/Hinkik - Ena.mp3", "stream")
