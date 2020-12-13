@@ -50,7 +50,7 @@ end
 
 function maingame:draw()  
   love.graphics.setColor(58 / 255, 65 / 255, 81 / 255, 1)
-  
+    love.graphics.setLineWidth(4)
   love.graphics.circle("fill", gw / 2, gh / 2, 450)
   if (isEndGame) then
     if (levelIndex == 3) then
@@ -63,15 +63,19 @@ function maingame:draw()
   else
     circle:draw(isEndGame)
     --square:draw()
-    if (levelIndex == 3) then
+    
+    if (levelIndex == 2) then
+      love.graphics.setColor(1, 1, 1, 1)
+      love.graphics.line(gw/2-450, gh/2, gw/2+450, gh/2)
+    elseif (levelIndex == 3) then
       love.graphics.setColor(0.1, 0.1, 0.1, 1)
       love.graphics.circle("fill", gw / 2, gh / 2, 150)
       love.graphics.setColor(1, 1, 1, 1)
       love.graphics.circle("line", gw / 2, gh / 2, 150)
     end
   end
+  
   love.graphics.setColor(1, 1, 1, 1)
-  love.graphics.setLineWidth(4)
   love.graphics.setFont(scoreFont)
   
   if (levelIndex == 4) then

@@ -27,9 +27,25 @@ function cursor:update(dt, levelIndex)
         cursorPosX = gw/2 + dx/dist*(225-19)
         cursorPosY = gh/2 + dy/dist*(225-19)
       end
+      
     elseif (levelIndex == 3) then      
       cursorPosX = gw/2 + dx/dist*(450-19)
       cursorPosY = gh/2 + dy/dist*(450-19)
+      
+    elseif (levelIndex == 2) then     
+      if (my < gh/2-19) and (dist < (450-19)) then
+        cursorPosX = mx
+        cursorPosY = my
+      elseif (my > gh/2-19) and (dist > (450-19)) then
+        cursorPosX = gw/2 + dx/dist*(450-19)
+        cursorPosY = gh/2-19
+      elseif (my > gh/2-19) then
+        cursorPosX = mx
+        cursorPosY = gh/2-19
+      elseif (dist > (450-19)) then
+        cursorPosX = gw/2 + dx/dist*(450-19)
+        cursorPosY = gh/2 + dy/dist*(450-19)
+      end
     else
       if (dist < (450-19)) then
         cursorPosX = mx
