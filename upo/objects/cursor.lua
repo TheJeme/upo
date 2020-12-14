@@ -19,7 +19,7 @@ function cursor:update(dt, levelIndex)
     end
 
   elseif (statemanager:getState() == "game") then
-    if (levelIndex == 4) then      
+    if (levelIndex == 4) then
       if (dist < (225-19)) then
         cursorPosX = mx
         cursorPosY = my
@@ -27,25 +27,10 @@ function cursor:update(dt, levelIndex)
         cursorPosX = gw/2 + dx/dist*(225-19)
         cursorPosY = gh/2 + dy/dist*(225-19)
       end
-      
-    elseif (levelIndex == 3) then      
+
+    elseif (levelIndex == 3) then
       cursorPosX = gw/2 + dx/dist*(450-19)
       cursorPosY = gh/2 + dy/dist*(450-19)
-      
-    elseif (levelIndex == 2) then     
-      if (my < gh/2-19) and (dist < (450-19)) then
-        cursorPosX = mx
-        cursorPosY = my
-      elseif (my > gh/2-19) and (dist > (450-19)) then
-        cursorPosX = gw/2 + dx/dist*(450-19)
-        cursorPosY = gh/2-19
-      elseif (my > gh/2-19) then
-        cursorPosX = mx
-        cursorPosY = gh/2-19
-      elseif (dist > (450-19)) then
-        cursorPosX = gw/2 + dx/dist*(450-19)
-        cursorPosY = gh/2 + dy/dist*(450-19)
-      end
     else
       if (dist < (450-19)) then
         cursorPosX = mx
@@ -56,22 +41,38 @@ function cursor:update(dt, levelIndex)
       end
     end
   end
-  cursortrail_array:update(dt, cursorPosX, cursorPosY)
+  cursortrail_array:update(dt, cursorPosX, cursorPosY, levelIndex)
 end
 
-function cursor:draw(isEndGame)
+function cursor:draw(isEndGame, levelIndex)
   cursortrail_array:draw()
-  love.graphics.setLineWidth(3)
   if (isEndGame) then
     love.graphics.setColor(231 / 255, 76 / 255, 60 / 255, 1)
   else
     love.graphics.setColor(42 / 255, 49 / 255, 61 / 255, 1)
   end
   love.graphics.circle('fill', cursorPosX, cursorPosY, 15, 120)
-  love.graphics.setColor(1, 1, 1, 1)
-  love.graphics.circle('line', cursorPosX, cursorPosY, 15, 120)
+  love.graphics.setColor(White)
   love.graphics.setLineWidth(2)
+  love.graphics.circle('line', cursorPosX, cursorPosY, 15, 120)
   love.graphics.circle('line', mx, my, 15)
+
+  if (levelIndex == 2) then
+    if (isEndGame) then
+      love.graphics.setColor(231 / 255, 76 / 255, 60 / 255, 1)
+    else
+      love.graphics.setColor(42 / 255, 49 / 255, 61 / 255, 1)
+    end
+    love.graphics.circle('fill', -cursorPosX+gw, cursorPosY, 15, 120)
+    love.graphics.circle('fill', -cursorPosX+gw, -cursorPosY+gh, 15, 120)
+    love.graphics.circle('fill', cursorPosX, -cursorPosY+gh, 15, 120)
+    love.graphics.setColor(White)
+    love.graphics.setLineWidth(2)
+    love.graphics.circle('line', -cursorPosX+gw, cursorPosY, 15, 120)
+    love.graphics.circle('line', -cursorPosX+gw, -cursorPosY+gh, 15, 120)
+    love.graphics.circle('line', cursorPosX, -cursorPosY+gh, 15, 120)
+  end
+
 end
 
 function cursor:getPositionX()

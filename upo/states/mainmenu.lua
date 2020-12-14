@@ -93,7 +93,7 @@ function mainmenu:draw()
   effectcircle:draw()
   love.graphics.setColor(58 / 255, 65 / 255, 81 / 255, 1)
   love.graphics.circle("fill", gw/2, gh/2, 450+menumusic:getEnergy()*10)
-  love.graphics.setColor(1, 1, 1, 1)
+  love.graphics.setColor(White)
   if(menustate == "main") then
     mainmenu:mainButtons()
   elseif(menustate == "options") then
@@ -151,39 +151,39 @@ function mainmenu:mainButtons()
   love.graphics.setFont(titleFont)
 
   if (playButton:getHoverState()) then
-    love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
+    love.graphics.setColor(Opacity17)
   else
-    love.graphics.setColor(0, 0, 0, 0)
+    love.graphics.setColor(Transparent)
   end
   love.graphics.polygon('fill', gw/2 - 450-menumusic:getEnergy()*10, gh*0.5,
                                 gw/2 + 450+menumusic:getEnergy()*10, gh*0.5,
                                 gw/2 + 450+menumusic:getEnergy()*10, gh*0.5 + 100,
                                 gw/2 - 450-menumusic:getEnergy()*10, gh*0.5 + 100)
-  love.graphics.setColor(1, 1, 1, 1)
+  love.graphics.setColor(White)
   love.graphics.printf("Play", 0, gh*0.52, gw, "center")
 
   if (optionsButton:getHoverState()) then
-    love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
+    love.graphics.setColor(Opacity17)
   else
-    love.graphics.setColor(0, 0, 0, 0)
+    love.graphics.setColor(Transparent)
   end
   love.graphics.polygon('fill', gw/2 - 450-menumusic:getEnergy()*10, gh*0.5 + 100,
                                 gw/2 + 450+menumusic:getEnergy()*10, gh*0.5 + 100,
                                 gw/2 + 450+menumusic:getEnergy()*10, gh*0.5 + 200,
                                 gw/2 - 450-menumusic:getEnergy()*10, gh*0.5 + 200)
-  love.graphics.setColor(1, 1, 1, 1)
+  love.graphics.setColor(White)
   love.graphics.printf("Options", 0, gh*0.52 + 100, gw, "center")
 
   if (quitButton:getHoverState()) then
-    love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
+    love.graphics.setColor(Opacity17)
   else
-    love.graphics.setColor(0, 0, 0, 0)
+    love.graphics.setColor(Transparent)
   end
   love.graphics.polygon('fill', gw/2 - 450-menumusic:getEnergy()*10, gh*0.5 + 200,
                                 gw/2 + 450+menumusic:getEnergy()*10, gh*0.5 + 200,
                                 gw/2 + 450+menumusic:getEnergy()*10, gh*0.5 + 300,
                                 gw/2 - 450-menumusic:getEnergy()*10, gh*0.5 + 300)
-  love.graphics.setColor(1, 1, 1, 1)
+  love.graphics.setColor(White)
   love.graphics.printf("Quit", 0, gh*0.52 + 200, gw, "center")
 end
 
@@ -195,39 +195,39 @@ function mainmenu:optionsButtons()
   love.graphics.setFont(titleFont)
 
   if (optionsResolutionButton:getHoverState()) then
-    love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
+    love.graphics.setColor(Opacity17)
   else
-    love.graphics.setColor(0, 0, 0, 0)
+    love.graphics.setColor(Transparent)
   end
   love.graphics.polygon('fill', gw/2 - 450-menumusic:getEnergy()*10, gh*0.5,
                                 gw/2 + 450+menumusic:getEnergy()*10, gh*0.5,
                                 gw/2 + 450+menumusic:getEnergy()*10, gh*0.5 + 100,
                                 gw/2 - 450-menumusic:getEnergy()*10, gh*0.5 + 100)
-  love.graphics.setColor(1, 1, 1, 1)
+  love.graphics.setColor(White)
   love.graphics.printf("Resolution: " .. resolutionList[resolutionIndex][1] .. "x" .. resolutionList[resolutionIndex][2], 0, gh*0.52, gw, "center")
 
   if (optionsVolumeButton:getHoverState()) then
-    love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
+    love.graphics.setColor(Opacity17)
   else
-    love.graphics.setColor(0, 0, 0, 0)
+    love.graphics.setColor(Transparent)
   end
   love.graphics.polygon('fill', gw/2 - 450-menumusic:getEnergy()*10, gh*0.5 + 100,
                                 gw/2 + 450+menumusic:getEnergy()*10, gh*0.5 + 100,
                                 gw/2 + 450+menumusic:getEnergy()*10, gh*0.5 + 200,
                                 gw/2 - 450-menumusic:getEnergy()*10, gh*0.5 + 200)
-  love.graphics.setColor(1, 1, 1, 1)
+  love.graphics.setColor(White)
   love.graphics.printf("Volume: " .. volumeValue .."%", 0, gh*0.52 + 100, gw, "center")
 
   if (optionsBackButton:getHoverState()) then
-    love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
+    love.graphics.setColor(Opacity17)
   else
-    love.graphics.setColor(0, 0, 0, 0)
+    love.graphics.setColor(Transparent)
   end
   love.graphics.polygon('fill', gw/2 - 450-menumusic:getEnergy()*10, gh*0.5 + 200,
                                 gw/2 + 450+menumusic:getEnergy()*10, gh*0.5 + 200,
                                 gw/2 + 450+menumusic:getEnergy()*10, gh*0.5 + 300,
                                 gw/2 - 450-menumusic:getEnergy()*10, gh*0.5 + 300)
-  love.graphics.setColor(1, 1, 1, 1)
+  love.graphics.setColor(White)
   love.graphics.printf("Back", 0, gh*0.52 + 200, gw, "center")
 end
 
@@ -236,157 +236,157 @@ function mainmenu:quitButtons()
   love.graphics.printf("you really want to quit?", gw/2-450, gh*0.25, 450*2, "center")
 
   if (quitYesButton:getHoverState()) then
-    love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
+    love.graphics.setColor(Opacity17)
   else
-    love.graphics.setColor(0, 0, 0, 0)
+    love.graphics.setColor(Transparent)
   end
   love.graphics.polygon('fill', gw/2 - 450-menumusic:getEnergy()*10, gh*0.5,
                                 gw/2 + 450+menumusic:getEnergy()*10, gh*0.5,
                                 gw/2 + 450+menumusic:getEnergy()*10, gh*0.5 + 100,
                                 gw/2 - 450-menumusic:getEnergy()*10, gh*0.5 + 100)
-  love.graphics.setColor(1, 1, 1, 1)
+  love.graphics.setColor(White)
   love.graphics.printf("Yes", 0, gh*0.52, gw, "center")
 
   if (quitNoButton:getHoverState()) then
-    love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
+    love.graphics.setColor(Opacity17)
   else
-    love.graphics.setColor(0, 0, 0, 0)
+    love.graphics.setColor(Transparent)
   end
   love.graphics.polygon('fill', gw/2 - 450-menumusic:getEnergy()*10, gh*0.5 + 100,
                                 gw/2 + 450+menumusic:getEnergy()*10, gh*0.5 + 100,
                                 gw/2 + 450+menumusic:getEnergy()*10, gh*0.5 + 200,
                                 gw/2 - 450-menumusic:getEnergy()*10, gh*0.5 + 200)
-  love.graphics.setColor(1, 1, 1, 1)
+  love.graphics.setColor(White)
   love.graphics.printf("No", 0, gh*0.52 + 100, gw, "center")
 end
 
 function mainmenu:levels()
   love.graphics.setFont(levelTitleFont)
   if (level1Button:getHoverState()) then
-    love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
+    love.graphics.setColor(Opacity17)
   else
-    love.graphics.setColor(0, 0, 0, 0)
+    love.graphics.setColor(Transparent)
   end
   love.graphics.polygon('fill', gw/2 - 450-menumusic:getEnergy()*10, 0,
                                 gw/2 + 450+menumusic:getEnergy()*10, 0,
                                 gw/2 + 450+menumusic:getEnergy()*10, gh*0.1 + 120,
                                 gw/2 - 450-menumusic:getEnergy()*10, gh*0.1 + 120)
-  love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
+  love.graphics.setColor(Opacity17)
   love.graphics.line(gw/2 + 330+menumusic:getEnergy()*10, gh*0.1 + 120, gw/2 - 330-menumusic:getEnergy()*10, gh*0.1 + 120)
 
-  love.graphics.setColor(1, 1, 1, 1)
+  love.graphics.setColor(White)
   love.graphics.printf("ParagonX9 - Chaoz Airflow", 0, gh*0.1 + 30, gw, "center")
   love.graphics.setFont(levelScoreFont)
   love.graphics.printf("Best Time: 123.12", 0, gh*0.1 + 70, gw, "center")
 
   love.graphics.setFont(levelTitleFont)
   if (level2Button:getHoverState()) then
-    love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
+    love.graphics.setColor(Opacity17)
   else
-    love.graphics.setColor(0, 0, 0, 0)
+    love.graphics.setColor(Transparent)
   end
   love.graphics.polygon('fill', gw/2 - 450-menumusic:getEnergy()*10, gh*0.1 + 120,
                                 gw/2 + 450+menumusic:getEnergy()*10, gh*0.1 + 120,
                                 gw/2 + 450+menumusic:getEnergy()*10, gh*0.1 + 240,
                                 gw/2 - 450-menumusic:getEnergy()*10, gh*0.1 + 240)
 
-  love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
+  love.graphics.setColor(Opacity17)
   love.graphics.line(gw/2 + 410+menumusic:getEnergy()*10, gh*0.1 + 240, gw/2 - 410-menumusic:getEnergy()*10, gh*0.1 + 240)
 
-  love.graphics.setColor(1, 1, 1, 1)
+  love.graphics.setColor(White)
   love.graphics.printf("Hinkik - Explorers", 0, gh*0.1 + 120 + 30, gw, "center")
   love.graphics.setFont(levelScoreFont)
   love.graphics.printf("Best Time: 123.12", 0, gh*0.1 + 70 + 120, gw, "center")
 
   love.graphics.setFont(levelTitleFont)
   if (level3Button:getHoverState()) then
-    love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
+    love.graphics.setColor(Opacity17)
   else
-    love.graphics.setColor(0, 0, 0, 0)
+    love.graphics.setColor(Transparent)
   end
   love.graphics.polygon('fill', gw/2 - 450-menumusic:getEnergy()*10, gh*0.1 + 240,
                                 gw/2 + 450+menumusic:getEnergy()*10, gh*0.1 + 240,
                                 gw/2 + 450+menumusic:getEnergy()*10, gh*0.1 + 360,
                                 gw/2 - 450-menumusic:getEnergy()*10, gh*0.1 + 360)
 
-  love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
+  love.graphics.setColor(Opacity17)
   love.graphics.line(gw/2 + 450+menumusic:getEnergy()*10, gh*0.1 + 360, gw/2 - 450-menumusic:getEnergy()*10, gh*0.1 + 360)
 
 
-  love.graphics.setColor(1, 1, 1, 1)
+  love.graphics.setColor(White)
   love.graphics.printf("Hinkik - Time Leaper", 0, gh*0.1 + 240 + 30, gw, "center")
   love.graphics.setFont(levelScoreFont)
   love.graphics.printf("Best Time: 123.12", 0, gh*0.1 + 240 + 70, gw, "center")
 
   love.graphics.setFont(levelTitleFont)
   if (level4Button:getHoverState()) then
-    love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
+    love.graphics.setColor(Opacity17)
   else
-    love.graphics.setColor(0, 0, 0, 0)
+    love.graphics.setColor(Transparent)
   end
   love.graphics.polygon('fill', gw/2 - 450-menumusic:getEnergy()*10, gh*0.1 + 360,
                                 gw/2 + 450+menumusic:getEnergy()*10, gh*0.1 + 360,
                                 gw/2 + 450+menumusic:getEnergy()*10, gh*0.1 + 480,
                                 gw/2 - 450-menumusic:getEnergy()*10, gh*0.1 + 480)
 
-  love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
+  love.graphics.setColor(Opacity17)
   love.graphics.line(gw/2 + 445+menumusic:getEnergy()*10, gh*0.1 + 480, gw/2 - 445-menumusic:getEnergy()*10, gh*0.1 + 480)
 
-  love.graphics.setColor(1, 1, 1, 1)
+  love.graphics.setColor(White)
   love.graphics.printf("Lchavasse - Lunar Abyss", 0, gh*0.1 + 360 + 30, gw, "center")
   love.graphics.setFont(levelScoreFont)
   love.graphics.printf("Best Time: 123.12", 0, gh*0.1 + 360 + 70, gw, "center")
 
   love.graphics.setFont(levelTitleFont)
   if (level5Button:getHoverState()) then
-    love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
+    love.graphics.setColor(Opacity17)
   else
-    love.graphics.setColor(0, 0, 0, 0)
+    love.graphics.setColor(Transparent)
   end
   love.graphics.polygon('fill', gw/2 - 450-menumusic:getEnergy()*10, gh*0.1 + 480,
                                 gw/2 + 450+menumusic:getEnergy()*10, gh*0.1 + 480,
                                 gw/2 + 450+menumusic:getEnergy()*10, gh*0.1 + 600,
                                 gw/2 - 450-menumusic:getEnergy()*10, gh*0.1 + 600)
 
-  love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
+  love.graphics.setColor(Opacity17)
   love.graphics.line(gw/2 + 420+menumusic:getEnergy()*10, gh*0.1 + 600, gw/2 - 420-menumusic:getEnergy()*10, gh*0.1 + 600)
 
-  love.graphics.setColor(1, 1, 1, 1)
+  love.graphics.setColor(White)
   love.graphics.printf("Xtrullor - Supernova", 0, gh*0.1 + 480 + 30, gw, "center")
   love.graphics.setFont(levelScoreFont)
   love.graphics.printf("Best Time: 123.12", 0, gh*0.1 + 480 + 70, gw, "center")
 
   love.graphics.setFont(levelTitleFont)
   if (level6Button:getHoverState()) then
-    love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
+    love.graphics.setColor(Opacity17)
   else
-    love.graphics.setColor(0, 0, 0, 0)
+    love.graphics.setColor(Transparent)
   end
   love.graphics.polygon('fill', gw/2 - 450-menumusic:getEnergy()*10, gh*0.1 + 600,
                                 gw/2 + 450+menumusic:getEnergy()*10, gh*0.1 + 600,
                                 gw/2 + 450+menumusic:getEnergy()*10, gh*0.1 + 720,
                                 gw/2 - 450-menumusic:getEnergy()*10, gh*0.1 + 720)
 
-  love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
+  love.graphics.setColor(Opacity17)
   love.graphics.line(gw/2 + 350+menumusic:getEnergy()*10, gh*0.1 + 720, gw/2 - 350-menumusic:getEnergy()*10, gh*0.1 + 720)
 
-  love.graphics.setColor(1, 1, 1, 1)
+  love.graphics.setColor(White)
   love.graphics.printf("Kurototei - Galaxy Collapse", 0, gh*0.1 + 600 + 30, gw, "center")
   love.graphics.setFont(levelScoreFont)
   love.graphics.printf("Best Time: 123.12", 0, gh*0.1 + 600 + 70, gw, "center")
 
   love.graphics.setFont(levelTitleFont)
   if (levelBackButton:getHoverState()) then
-    love.graphics.setColor(0.1, 0.1, 0.1, 0.17)
+    love.graphics.setColor(Opacity17)
   else
-    love.graphics.setColor(0, 0, 0, 0)
+    love.graphics.setColor(Transparent)
   end
   love.graphics.polygon('fill', gw/2 - 450-menumusic:getEnergy()*10, gh*0.1 + 720,
                                 gw/2 + 450+menumusic:getEnergy()*10, gh*0.1 + 720,
                                 gw/2 + 450+menumusic:getEnergy()*10, gh,
                                 gw/2 - 450-menumusic:getEnergy()*10, gh)
 
-  love.graphics.setColor(1, 1, 1, 1)
+  love.graphics.setColor(White)
   love.graphics.printf("Back", 0, gh*0.1 + 720 + 60, gw, "center")
 
 end

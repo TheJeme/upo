@@ -33,7 +33,7 @@ function maingame:update(dt)
     restartButton:update(dt)
     exitButton:update(dt)
   end
-  
+
   if not (isEndGame) then
     circle:update(dt)
     square:update(dt)
@@ -48,7 +48,7 @@ function maingame:update(dt)
   end
 end
 
-function maingame:draw()  
+function maingame:draw()
   love.graphics.setColor(58 / 255, 65 / 255, 81 / 255, 1)
     love.graphics.setLineWidth(4)
   love.graphics.circle("fill", gw / 2, gh / 2, 450)
@@ -63,21 +63,17 @@ function maingame:draw()
   else
     circle:draw(isEndGame)
     --square:draw()
-    
-    if (levelIndex == 2) then
-      love.graphics.setColor(1, 1, 1, 1)
-      love.graphics.line(gw/2-450, gh/2, gw/2+450, gh/2)
-    elseif (levelIndex == 3) then
+    if (levelIndex == 3) then
       love.graphics.setColor(0.1, 0.1, 0.1, 1)
       love.graphics.circle("fill", gw / 2, gh / 2, 150)
       love.graphics.setColor(1, 1, 1, 1)
       love.graphics.circle("line", gw / 2, gh / 2, 150)
     end
   end
-  
+
   love.graphics.setColor(1, 1, 1, 1)
   love.graphics.setFont(scoreFont)
-  
+
   if (levelIndex == 4) then
     love.graphics.draw(level3BG)
     love.graphics.circle("line", gw / 2, gh / 2, 225)
@@ -92,8 +88,8 @@ function maingame:draw()
     love.graphics.circle("line", gw / 2, gh / 2, 450)
     love.graphics.printf(string.format("%0.1f", timer), 0, gh*0.2, gw, "center")
   end
-  
-  cursor:draw(isEndGame)
+
+  cursor:draw(isEndGame, levelIndex)
 end
 
 function maingame:mousepressed(x, y, button)
@@ -125,21 +121,21 @@ end
 
 function maingame:endScreen()
   love.graphics.setFont(bigScoreFont)
-  
+
   if (restartButton:getHoverState()) then
     love.graphics.setColor(1, 1, 1, 1)
   else
     love.graphics.setColor(0.7, 0.7, 0.7, 1)
   end
   love.graphics.printf("Restart", 0, gh*0.44, gw, "center")
-  
+
   if (exitButton:getHoverState()) then
     love.graphics.setColor(1, 1, 1, 1)
   else
     love.graphics.setColor(0.7, 0.7, 0.7, 1)
   end
   love.graphics.printf("Exit", 0, gh*0.56, gw, "center")
-  
+
   love.graphics.setFont(smallScoreFont)
   love.graphics.setColor(1, 1, 1, 1)
   if (levelIndex == 4) then
