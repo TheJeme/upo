@@ -1,6 +1,8 @@
 require 'objects/cursor'
+
 require 'objects/circle'
 require 'objects/square'
+require 'objects/kite'
 
 local audio = require "lib/wave"
 
@@ -37,11 +39,13 @@ function maingame:update(dt)
   if not (isEndGame) then
     circle:update(dt)
     square:update(dt)
+    kite:update(dt)
     timer = timer + dt
     if (respawnTime >= 0.18 / timer*20) then
       respawnTime = 0
-      createCircle(320+timer*12)
+      --createCircle(320+timer*12)
       --createSquare(0, 220)
+      createKite(cursor:getPositionX(), cursor:getPositionY(), 620)
     else
       respawnTime = respawnTime + dt
     end
@@ -54,7 +58,8 @@ function maingame:draw()
   love.graphics.circle("fill", gw / 2, gh / 2, 450)
   if not (isEndGame) then
     circle:draw(isEndGame)
-    --square:draw()
+    square:draw()
+    kite:draw()
   end
 
   love.graphics.setColor(White)

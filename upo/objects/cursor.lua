@@ -47,9 +47,9 @@ end
 function cursor:draw(isEndGame, levelIndex)
   cursortrail_array:draw()
   if (isEndGame) then
-    love.graphics.setColor(231 / 255, 76 / 255, 60 / 255, 1)
+    love.graphics.setColor(Red)
   else
-    love.graphics.setColor(42 / 255, 49 / 255, 61 / 255, 1)
+    love.graphics.setColor(DarkBlue)
   end
   love.graphics.circle('fill', cursorPosX, cursorPosY, 15, 120)
   love.graphics.setColor(White)
@@ -59,27 +59,27 @@ function cursor:draw(isEndGame, levelIndex)
 
   if (levelIndex == 2) then
     if (isEndGame) then
-      love.graphics.setColor(231 / 255, 76 / 255, 60 / 255, 1)
+      love.graphics.setColor(Red)
     else
-      love.graphics.setColor(42 / 255, 49 / 255, 61 / 255, 1)
+      love.graphics.setColor(DarkBlue)
     end
     love.graphics.circle('fill', -cursorPosX+gw, cursorPosY, 15, 120)
     love.graphics.setColor(White)
     love.graphics.circle('line', -cursorPosX+gw, cursorPosY, 15, 120)
     
     if (isEndGame) then
-      love.graphics.setColor(231 / 255, 76 / 255, 60 / 255, 1)
+      love.graphics.setColor(Red)
     else
-      love.graphics.setColor(42 / 255, 49 / 255, 61 / 255, 1)
+      love.graphics.setColor(DarkBlue)
     end
     love.graphics.circle('fill', cursorPosX, -cursorPosY+gh, 15, 120)
     love.graphics.setColor(White)
     love.graphics.circle('line', cursorPosX, -cursorPosY+gh, 15, 120)
     
     if (isEndGame) then
-      love.graphics.setColor(231 / 255, 76 / 255, 60 / 255, 1)
+      love.graphics.setColor(Red)
     else
-      love.graphics.setColor(42 / 255, 49 / 255, 61 / 255, 1)
+      love.graphics.setColor(DarkBlue)
     end
     love.graphics.circle('fill', -cursorPosX+gw, -cursorPosY+gh, 15, 120)
     love.graphics.setColor(White)

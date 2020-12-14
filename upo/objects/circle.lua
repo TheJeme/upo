@@ -2,7 +2,7 @@ circle = {}
 listOfCircles = {}
 
 function createCircle(speed)
-  crl = {}
+  local crl = {}
   crl.rotation = math.random(0, math.pi*2)
   crl.speed = -speed
   crl.x = 500
