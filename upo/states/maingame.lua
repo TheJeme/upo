@@ -28,7 +28,7 @@ function maingame:load()
 end
 
 function maingame:update(dt)
-  cursor:update(dt, levelIndex)
+  cursor:update(dt, isEndGame, levelIndex)
   if (isEndGame) then
     restartButton:update(dt)
     exitButton:update(dt)
@@ -52,29 +52,23 @@ function maingame:draw()
   love.graphics.setColor(58 / 255, 65 / 255, 81 / 255, 1)
     love.graphics.setLineWidth(4)
   love.graphics.circle("fill", gw / 2, gh / 2, 450)
-  if (isEndGame) then
-    if (levelIndex == 3) then
-      love.graphics.setColor(0.1, 0.1, 0.1, 1)
-      love.graphics.circle("fill", gw / 2, gh / 2, 150)
-      love.graphics.setColor(White)
-      love.graphics.circle("line", gw / 2, gh / 2, 150)
-    end
-    maingame:endScreen()
-  else
+  if not (isEndGame) then
     circle:draw(isEndGame)
     --square:draw()
-    if (levelIndex == 3) then
-      love.graphics.setColor(0.1, 0.1, 0.1, 1)
-      love.graphics.circle("fill", gw / 2, gh / 2, 150)
-      love.graphics.setColor(White)
-      love.graphics.circle("line", gw / 2, gh / 2, 150)
-    end
   end
 
   love.graphics.setColor(White)
   love.graphics.setFont(scoreFont)
 
-  if (levelIndex == 4) then
+  if (levelIndex == 3) then
+    love.graphics.setColor(0.1, 0.1, 0.1, 1)
+    love.graphics.circle("fill", gw / 2, gh / 2, 150)
+    love.graphics.setColor(White)
+    love.graphics.circle("line", gw / 2, gh / 2, 150)
+    love.graphics.draw(level1BG)
+    love.graphics.circle("line", gw / 2, gh / 2, 450)
+    love.graphics.printf(string.format("%0.1f", timer), 0, gh*0.2, gw, "center")
+  elseif (levelIndex == 4) then
     love.graphics.draw(level3BG)
     love.graphics.circle("line", gw / 2, gh / 2, 225)
     love.graphics.printf(string.format("%0.1f", timer), 0, gh*0.4, gw, "center")
@@ -90,6 +84,9 @@ function maingame:draw()
   end
 
   cursor:draw(isEndGame, levelIndex)
+  if (isEndGame) then
+    maingame:endScreen()
+  end
 end
 
 function maingame:mousepressed(x, y, button)
@@ -120,8 +117,10 @@ function die()
 end
 
 function maingame:endScreen()
+  love.graphics.setColor(0, 0, 0, 0.2)
+  love.graphics.rectangle('fill', 0, 0, gw, gh)
+  
   love.graphics.setFont(bigScoreFont)
-
   if (restartButton:getHoverState()) then
     love.graphics.setColor(White)
   else
@@ -136,7 +135,7 @@ function maingame:endScreen()
   end
   love.graphics.printf("Exit", 0, gh*0.56, gw, "center")
 
-  love.graphics.setFont(smallScoreFont)
+  love.graphics.setFont(levelScoreFont)
   love.graphics.setColor(White)
   if (levelIndex == 4) then
     love.graphics.printf("NEW PERSONAL BEST", 0, gh*0.37, gw, "center")

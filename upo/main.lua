@@ -28,7 +28,7 @@ function love.draw()
     statemanager:draw()
 	simpleScale.unSet()
   beloved:draw()
-  love.graphics.setFont(smallScoreFont)
+  love.graphics.setFont(levelScoreFont)
   love.graphics.print("FPS " .. love.timer.getFPS())
 end
 

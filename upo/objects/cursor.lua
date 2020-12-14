@@ -4,7 +4,7 @@ cursor = {}
 
 local cursorPosX, cursorPosY
 
-function cursor:update(dt, levelIndex)
+function cursor:update(dt, isEndGame, levelIndex)
   local dx = mx - gw/2
   local dy = my - gh/2
   local dist = math.sqrt(dx^2+dy^2)
@@ -18,7 +18,7 @@ function cursor:update(dt, levelIndex)
       cursorPosY = gh/2 + dy/dist*(450-19+menumusic:getEnergy()*10)
     end
 
-  elseif (statemanager:getState() == "game") then
+  elseif (statemanager:getState() == "game" and not isEndGame) then
     if (levelIndex == 4) then
       if (dist < (225-19)) then
         cursorPosX = mx
@@ -64,13 +64,26 @@ function cursor:draw(isEndGame, levelIndex)
       love.graphics.setColor(42 / 255, 49 / 255, 61 / 255, 1)
     end
     love.graphics.circle('fill', -cursorPosX+gw, cursorPosY, 15, 120)
-    love.graphics.circle('fill', -cursorPosX+gw, -cursorPosY+gh, 15, 120)
+    love.graphics.setColor(White)
+    love.graphics.circle('line', -cursorPosX+gw, cursorPosY, 15, 120)
+    
+    if (isEndGame) then
+      love.graphics.setColor(231 / 255, 76 / 255, 60 / 255, 1)
+    else
+      love.graphics.setColor(42 / 255, 49 / 255, 61 / 255, 1)
+    end
     love.graphics.circle('fill', cursorPosX, -cursorPosY+gh, 15, 120)
     love.graphics.setColor(White)
-    love.graphics.setLineWidth(2)
-    love.graphics.circle('line', -cursorPosX+gw, cursorPosY, 15, 120)
-    love.graphics.circle('line', -cursorPosX+gw, -cursorPosY+gh, 15, 120)
     love.graphics.circle('line', cursorPosX, -cursorPosY+gh, 15, 120)
+    
+    if (isEndGame) then
+      love.graphics.setColor(231 / 255, 76 / 255, 60 / 255, 1)
+    else
+      love.graphics.setColor(42 / 255, 49 / 255, 61 / 255, 1)
+    end
+    love.graphics.circle('fill', -cursorPosX+gw, -cursorPosY+gh, 15, 120)
+    love.graphics.setColor(White)
+    love.graphics.circle('line', -cursorPosX+gw, -cursorPosY+gh, 15, 120)
   end
 
 end
