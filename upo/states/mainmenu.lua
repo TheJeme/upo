@@ -7,7 +7,6 @@ local audio = require "lib/wave"
 
 mainmenu = {}
 
-
 function mainmenu:load()
   menustate = "main"
 

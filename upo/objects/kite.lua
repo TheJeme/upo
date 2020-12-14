@@ -7,7 +7,7 @@ function createKite(targetX, targetY, speed)
   kte.speed = -speed
   kte.targetX = targetX
   kte.targetY = targetY
-  kte.x = 800
+  kte.x = 1000
   kte.y = 0
   kte.angleToCircle = 0
   
