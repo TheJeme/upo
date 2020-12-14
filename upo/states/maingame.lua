@@ -41,11 +41,11 @@ function maingame:update(dt)
     square:update(dt)
     kite:update(dt)
     timer = timer + dt
-    if (respawnTime >= 0.18 / timer*20) then
+    if (respawnTime >= 0.18 / timer*20+2/timer) then
       respawnTime = 0
-      --createCircle(320+timer*12)
+      createCircle(320+timer*7)
       --createSquare(0, 220)
-      createKite(cursor:getPositionX(), cursor:getPositionY(), 620)
+      createKite(cursor:getPositionX(), cursor:getPositionY(), 420+timer*2)
     else
       respawnTime = respawnTime + dt
     end
