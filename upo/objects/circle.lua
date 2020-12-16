@@ -14,7 +14,7 @@ end
 function circle:update(dt)
   for i, v in ipairs(listOfCircles) do
     v.x = v.x + v.speed * dt
-    if (math.abs(v.x) > 2000) then
+    if (v.x < -500) then
       table.remove(listOfCircles, i)
     end
   end

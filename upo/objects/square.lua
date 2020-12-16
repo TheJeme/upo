@@ -1,20 +1,31 @@
 square = {}
 listOfSquares = {}
 
-function createSquare(rotation, speed)
+function createSquare(y, rotation, speed, isExploable)
   local sqr = {}
   sqr.rotation = rotation * math.pi/180
-  sqr.speed = -speed
-  sqr.position = 500
+  sqr.speed = speed
+  sqr.x = 500
+  sqr.y = y
+  sqr.isExploable = isExploable
 
   table.insert(listOfSquares, sqr)
 end
 
 function square:update(dt)
   for i, v in ipairs(listOfSquares) do
-    v.position = v.position + v.speed * dt
-
-    if (math.abs(v.position) > 2000) then
+    v.x = v.x + v.speed * dt
+    if (v.isExploable and v.x > 800) then
+      createTriangle(v.x, v.y, 0, 420)
+      createTriangle(v.x, v.y, math.pi/2, 420)
+      createTriangle(v.x, v.y, math.pi, 420)
+      createTriangle(v.x, v.y, 3*math.pi/4, 420)
+      createTriangle(v.x, v.y, math.pi/4, 420)
+      createTriangle(v.x, v.y, 7*math.pi/4, 420)
+      createTriangle(v.x, v.y, 5*math.pi/4, 420)
+      createTriangle(v.x, v.y, 3*math.pi/2, 420)
+      table.remove(listOfSquares, i)      
+    elseif (v.x > 1500) then
       table.remove(listOfSquares, i)
     end
   end
@@ -22,36 +33,15 @@ end
 
 function square:draw()
     for i, v in ipairs(listOfSquares) do
-      love.graphics.push()
-      love.graphics.translate(gw / 2, gh / 2)
-      love.graphics.rotate(0)
-      love.graphics.setColor(Blue)
-      love.graphics.rectangle("fill", v.position, 0, 25, 25)
-      love.graphics.setColor(White)
-      love.graphics.rectangle("line", v.position, 0, 25, 25)
-
-      love.graphics.setColor(Blue)
-      love.graphics.rectangle("fill", v.position, 100, 25, 25)
-      love.graphics.setColor(White)
-      love.graphics.rectangle("line", v.position, 100, 25, 25)
-
-      love.graphics.setColor(Blue)
-      love.graphics.rectangle("fill", v.position, 200, 25, 25)
-      love.graphics.setColor(White)
-      love.graphics.rectangle("line", v.position, 200, 25, 25)
-
-      love.graphics.setColor(Blue)
-      love.graphics.rectangle("fill", v.position, 300, 25, 25)
-      love.graphics.setColor(White)
-      love.graphics.rectangle("line", v.position, 300, 25, 25)
-
-      love.graphics.setColor(Blue)
-      love.graphics.rectangle("fill", v.position, 400, 25, 25)
-      love.graphics.setColor(White)
-      love.graphics.rectangle("line", v.position, 400, 25, 25)
-
-      love.graphics.pop()
+      love.graphics.setColor(28 / 255, 31 / 255, 39 / 255, 1)
+      love.graphics.rectangle("fill", v.x, v.y, 25, 25, 10)
     end
+end
+
+function square:clear()
+  for i in pairs(listOfSquares) do
+    listOfSquares[i] = nil
+  end
 end
 
 return square

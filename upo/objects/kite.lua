@@ -9,7 +9,6 @@ function createKite(targetX, targetY, speed)
   kte.targetY = targetY
   kte.x = 1000
   kte.y = 0
-  kte.angleToCircle = 0
   
   table.insert(listOfKites, kte)
 end
@@ -17,7 +16,7 @@ end
 function kite:update(dt)
   for i, v in ipairs(listOfKites) do
     v.x = v.x + v.speed * dt
-    if (math.abs(v.x) > 2000) then
+    if (v.x < 1000) then
       table.remove(listOfKites, i)
     end
   end
@@ -35,7 +34,7 @@ function kite:draw()
 end
 
 function kite:clear()
-  for i, v in ipairs(listOfKites) do
+  for i in pairs(listOfKites) do
     listOfKites[i] = nil
   end
 end
