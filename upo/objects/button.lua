@@ -15,8 +15,8 @@ function newButton(x, y, width, height, func, func2)
 end
 
 function button:update(dt)    
-  self.isMouseOnButton = mx > self.x and mx < self.x + self.width and
-                          my > self.y and my < self.y + self.height                                       
+  self.isMouseOnButton = cursorMX > self.x and cursorMX < self.x + self.width and
+                          cursorMY > self.y and cursorMY < self.y + self.height                                       
   if self.isMouseOnButton then
     self.hover = true
   else
@@ -25,9 +25,17 @@ function button:update(dt)
 end
 
 function button:mousepressed(x, y, button)
-  if self.isMouseOnButton and button == 1 then
+  if self.isMouseOnButton and (button == 1) then
     self.func()
   elseif self.isMouseOnButton and button == 2 then
+    self.func2()
+  end
+end
+
+function button:gamepadpressed(joystick, button)
+  if self.isMouseOnButton and button == "a" then
+    self.func()
+  elseif self.isMouseOnButton and button == "x" then
     self.func2()
   end
 end

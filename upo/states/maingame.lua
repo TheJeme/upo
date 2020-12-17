@@ -106,6 +106,16 @@ function maingame:mousepressed(x, y, button)
   end
 end
 
+function maingame:gamepadpressed(joystick, button)
+  if (button == "start" or button == "back" or button == "b") then
+    die()
+  end
+  if (isEndGame) then
+    restartButton:gamepadpressed(joystick, button)
+    exitButton:gamepadpressed(joystick, button)
+  end
+end
+
 function maingame:keypressed(key)
   if (key == "escape") then
     die()

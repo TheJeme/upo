@@ -1,0 +1,6 @@
+require 'levels/level01'
+require 'levels/level02'
+require 'levels/level03'
+require 'levels/level04'
+require 'levels/level05'
+require 'levels/level06'

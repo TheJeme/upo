@@ -14,10 +14,15 @@ function love.load()
   math.randomseed(os.time())
   simpleScale.setWindow(gw, gh, resolutionList[resolutionIndex][1], resolutionList[resolutionIndex][2])
   love.window.setVSync(0)
+  cursor:load()
   beloved:load()
   statemanager:load()
   love.graphics.setBackgroundColor(0.1, 0.1, 0.1, 1)
   love.mouse.setVisible(false)
+    
+  joystick = nil
+  isJoystickMove = false
+  joystickNoticeTextOpacity = 0
   
   discordRPC.initialize(appId, true)
   now = os.time(os.date("*t"))
@@ -37,7 +42,7 @@ function discordApplyPresence()
   
   presence = {
     largeImageKey = "icon",
-    largeImageText = "upo v0.0.6",
+    largeImageText = "upo v0.0.7",
     details = detailsNow,
     state = stateNow,
     startTimestamp = now,
@@ -50,6 +55,7 @@ function love.update(dt)
   collectgarbage()
   mx = love.mouse.getX() / simpleScale.getScale()
   my = love.mouse.getY() / simpleScale.getScale()
+  
   statemanager:update(dt)
   
   if nextPresenceUpdate < love.timer.getTime() then
@@ -68,15 +74,40 @@ function love.draw()
   love.graphics.print("FPS " .. love.timer.getFPS())
 end
 
-
 function love.mousepressed(x, y, button)
   beloved:mousepressed(x, y, button)
   statemanager:mousepressed(x, y, button)
 end
 
+function love.gamepadpressed(joystick, button)
+  statemanager:gamepadpressed(joystick, button)
+  if (button == "y" and statemanager:getState() == "menu" and joystick ~= nil) then
+    isJoystickMove = not isJoystickMove
+    joystickNoticeTextOpacity = 1
+  end
+end
+
 function love.keypressed(key)
   beloved:keypressed(key)
   statemanager:keypressed(key)
+  if (key == "y" and statemanager:getState() == "menu" and joystick ~= nil) then
+    isJoystickMove = not isJoystickMove
+    joystickNoticeTextOpacity = 1
+  end
+end
+
+function love.joystickadded(jstick)
+  joystick = jstick
+end
+
+function love.joystickremoved(jstick)
+  if (joystick == jstick) then
+    joystick = nil
+    if (isJoystickMove) then
+      isJoystickMove = false
+      joystickNoticeTextOpacity = 1
+    end
+  end
 end
 
 function love.quit()

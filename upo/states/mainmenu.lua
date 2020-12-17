@@ -29,6 +29,7 @@ function mainmenu:load()
   quitYesButton = newButton(gw/2 - 450-menumusic:getEnergy()*10, gh*0.5, 900, 100, function() love.event.quit() end)
   quitNoButton = newButton(gw/2 - 450-menumusic:getEnergy()*10, gh*0.5 + 100, 900, 100, function() menustate = "main" end)
 
+  optionsJoystickButton = newButton(gw/2 - 450-menumusic:getEnergy()*10, gh*0.5 - 100, 900, 100, function() isJoystickMove = not isJoystickMove joystickNoticeTextOpacity = 1 end)
   optionsResolutionButton = newButton(gw/2 - 450-menumusic:getEnergy()*10, gh*0.5, 900, 100, function() mainmenu:changeResolution(1) end, function() mainmenu:changeResolution(-1) end)
   optionsVolumeButton = newButton(gw/2 - 450-menumusic:getEnergy()*10, gh*0.5 + 100, 900, 100, function() mainmenu:changeVolume(5) end, function() mainmenu:changeVolume(-5) end)
   optionsBackButton = newButton(gw/2 - 450-menumusic:getEnergy()*10, gh*0.5 + 200, 900, 100, function() menustate = "main" mainmenu:saveSettings() end)
@@ -69,6 +70,9 @@ function mainmenu:update(dt)
     optionsButton:update(dt)
     quitButton:update(dt)
   elseif (menustate == "options") then
+    if (joystick ~= nil) then
+      optionsJoystickButton:update(dt)
+    end
     optionsResolutionButton:update(dt)
     optionsVolumeButton:update(dt)
     optionsBackButton:update(dt)
@@ -114,6 +118,9 @@ function mainmenu:mousepressed(x, y, button)
     optionsButton:mousepressed(x, y, button)
     quitButton:mousepressed(x, y, button)
   elseif (menustate == "options") then
+    if (joystick ~= nil) then
+      optionsJoystickButton:mousepressed(x, y, button)
+    end
     optionsResolutionButton:mousepressed(x, y, button)
     optionsVolumeButton:mousepressed(x, y, button)
     optionsBackButton:mousepressed(x, y, button)
@@ -128,6 +135,41 @@ function mainmenu:mousepressed(x, y, button)
     level5Button:mousepressed(x, y, button)
     level6Button:mousepressed(x, y, button)
     levelBackButton:mousepressed(x, y, button)
+  end
+end
+
+function mainmenu:gamepadpressed(joystick, button)
+  if (button == "start" or button == "back" or button == "b") then
+    if (menustate == "main") then
+      menustate = "quit"
+    elseif (menustate == "options") then
+      menustate = "main"
+    elseif (menustate == "levels") then
+      menustate = "main"
+    end
+  end
+  if (menustate == "main") then
+    playButton:gamepadpressed(joystick, button)
+    optionsButton:gamepadpressed(joystick, button)
+    quitButton:gamepadpressed(joystick, button)
+  elseif (menustate == "options") then
+    if (joystick ~= nil) then
+      optionsJoystickButton:gamepadpressed(joystick, button)
+    end
+    optionsResolutionButton:gamepadpressed(joystick, button)
+    optionsVolumeButton:gamepadpressed(joystick, button)
+    optionsBackButton:gamepadpressed(joystick, button)
+  elseif (menustate == "quit") then
+    quitYesButton:gamepadpressed(joystick, button)
+    quitNoButton:gamepadpressed(joystick, button)
+  elseif (menustate == "levels") then
+    level1Button:gamepadpressed(joystick, button)
+    level2Button:gamepadpressed(joystick, button)
+    level3Button:gamepadpressed(joystick, button)
+    level4Button:gamepadpressed(joystick, button)
+    level5Button:gamepadpressed(joystick, button)
+    level6Button:gamepadpressed(joystick, button)
+    levelBackButton:gamepadpressed(joystick, button)
   end
 end
 
@@ -192,6 +234,25 @@ function mainmenu:optionsButtons()
   love.graphics.printf("Options", 0, gh*0.22, gw, "center")
 
   love.graphics.setFont(titleFont)
+
+  if (joystick ~= nil) then
+    if (optionsJoystickButton:getHoverState()) then
+      love.graphics.setColor(Opacity17)
+    else
+      love.graphics.setColor(Transparent)
+    end
+    love.graphics.polygon('fill', gw/2 - 450-menumusic:getEnergy()*10, gh*0.5 - 100,
+                                  gw/2 + 450+menumusic:getEnergy()*10, gh*0.5 - 100,
+                                  gw/2 + 450+menumusic:getEnergy()*10, gh*0.5,
+                                  gw/2 - 450-menumusic:getEnergy()*10, gh*0.5)
+    love.graphics.setColor(White)
+    if (isJoystickMove) then
+      love.graphics.printf("Disable Joystick movement", 0, gh*0.52 - 100, gw, "center")
+    else
+      love.graphics.printf("Enable Joystick movement", 0, gh*0.52 - 100, gw, "center")
+    end
+  end
+
 
   if (optionsResolutionButton:getHoverState()) then
     love.graphics.setColor(Opacity17)
