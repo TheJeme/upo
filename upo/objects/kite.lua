@@ -16,7 +16,7 @@ end
 function kite:update(dt)
   for i, v in ipairs(listOfKites) do
     v.x = v.x + v.speed * dt
-    if (v.x < 1000) then
+    if (v.x < -800) then
       table.remove(listOfKites, i)
     end
   end
