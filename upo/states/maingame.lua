@@ -44,7 +44,7 @@ function maingame:update(dt)
     triangle:update(dt)
     
     timer = timer + dt
-    if (respawnTime >= 1/math.sqrt(timer)) then
+    if (respawnTime >= 3/math.sqrt(timer)) then
       respawnTime = 0
       createCircle(320+timer*7)
       createSquare(220)

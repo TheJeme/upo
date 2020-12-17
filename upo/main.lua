@@ -21,6 +21,7 @@ function love.load()
   love.mouse.setVisible(false)
     
   joystick = nil
+  
   isJoystickMove = false
   joystickNoticeTextOpacity = 0
   

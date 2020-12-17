@@ -25,21 +25,21 @@ function cursor:update(dt, isEndGame, levelIndex)
       cursorMX = cursorMX + joystick:getGamepadAxis("rightx") * dt * 800
       cursorMY = cursorMY + joystick:getGamepadAxis("righty") * dt * 800
     end
-
-    if (cursorMX > gw) then
-      cursorMX = gw
-    elseif (cursorMX < 0) then
-      cursorMX = 0
-    end
-    
-    if (cursorMY > gh) then
-      cursorMY = gh
-    elseif (cursorMY < 0) then
-      cursorMY = 0
-    end
   else
     cursorMX = mx
     cursorMY = my
+  end
+  
+  if (cursorMX > gw) then
+    cursorMX = gw
+  elseif (cursorMX < 0) then
+    cursorMX = 0
+  end
+  
+  if (cursorMY > gh) then
+    cursorMY = gh
+  elseif (cursorMY < 0) then
+    cursorMY = 0
   end
   
   local dx = cursorMX - gw/2
