@@ -12,23 +12,23 @@ local appId = require 'applicationId'
 
 function love.load()
   math.randomseed(os.time())
-  simpleScale.setWindow(gw, gh, resolutionList[resolutionIndex][1], resolutionList[resolutionIndex][2])
+  simpleScale.setWindow(gw, gh, resolutionList[resolutionIndex][1], resolutionList[resolutionIndex][2], {fullscreen = true})
   love.window.setVSync(0)
   cursor:load()
   beloved:load()
   statemanager:load()
   love.graphics.setBackgroundColor(0.1, 0.1, 0.1, 1)
   love.mouse.setVisible(false)
-    
+
   joystick = nil
-  
+
   isJoystickMove = false
   joystickNoticeTextOpacity = 0
-  
+
   discordRPC.initialize(appId, true)
   now = os.time(os.date("*t"))
   detailsNow = "In Mainmenu"
-  stateNow = ""  
+  stateNow = ""
   nextPresenceUpdate = 0
 end
 
@@ -40,7 +40,7 @@ function discordApplyPresence()
     detailsNow = "In Mainmenu"
     stateNow = ""
   end
-  
+
   presence = {
     largeImageKey = "icon",
     largeImageText = "upo v0.0.7",
@@ -48,7 +48,7 @@ function discordApplyPresence()
     state = stateNow,
     startTimestamp = now,
   }
-  
+
   return presence
 end
 
@@ -56,9 +56,9 @@ function love.update(dt)
   collectgarbage()
   mx = love.mouse.getX() / simpleScale.getScale()
   my = love.mouse.getY() / simpleScale.getScale()
-  
+
   statemanager:update(dt)
-  
+
   if nextPresenceUpdate < love.timer.getTime() then
       discordRPC.updatePresence(discordApplyPresence())
       nextPresenceUpdate = love.timer.getTime() + 2.0
