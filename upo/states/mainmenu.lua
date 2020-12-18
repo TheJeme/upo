@@ -247,9 +247,9 @@ function mainmenu:optionsButtons()
                                   gw/2 - 450-menumusic:getEnergy()*10, gh*0.5)
     love.graphics.setColor(White)
     if (isJoystickMove) then
-      love.graphics.printf("Disable Joystick movement", 0, gh*0.52 - 100, gw, "center")
+      love.graphics.printf("Disable joystick movement", 0, gh*0.52 - 100, gw, "center")
     else
-      love.graphics.printf("Enable Joystick movement", 0, gh*0.52 - 100, gw, "center")
+      love.graphics.printf("Enable joystick movement", 0, gh*0.52 - 100, gw, "center")
     end
   end
 

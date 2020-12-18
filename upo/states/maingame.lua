@@ -1,3 +1,5 @@
+require 'managers/levelmanager'
+
 require 'objects/cursor'
 
 require 'objects/circle'
@@ -21,13 +23,14 @@ local level1BG = love.graphics.newImage("assets/level01.png")
 local level2BG = love.graphics.newImage("assets/level02.png")
 local level3BG = love.graphics.newImage("assets/level03.png")
 
-local respawnTime = 0
 local levelIndex
 local timer
 
 function maingame:load()
   restartButton = newButton(gw/2 - 200, gh*0.44, 400, 130, function() maingame:restart() end)
   exitButton = newButton(gw/2 - 200, gh*0.56, 400, 130, function() maingame:endLevel() end)
+
+  levelmanager:load()
 end
 
 function maingame:update(dt)
@@ -42,17 +45,9 @@ function maingame:update(dt)
     square:update(dt)
     kite:update(dt)
     triangle:update(dt)
-    
-    timer = timer + dt
-    if (respawnTime >= 3/math.sqrt(timer)) then
-      respawnTime = 0
-      createCircle(320+timer*7)
-      createSquare(220)
-      createKite(cursor:getPositionX(), cursor:getPositionY(), 420+timer*2)
 
-    else
-      respawnTime = respawnTime + dt
-    end
+    timer = timer + dt
+    levelmanager:update(dt, timer, levelIndex)
   end
 end
 
@@ -72,9 +67,9 @@ function maingame:draw()
 
   if (levelIndex == 3) then
     love.graphics.setColor(0.1, 0.1, 0.1, 1)
-    love.graphics.circle("fill", gw / 2, gh / 2, 150)
+    love.graphics.circle("fill", gw / 2, gh / 2, 120)
     love.graphics.setColor(White)
-    love.graphics.circle("line", gw / 2, gh / 2, 150)
+    love.graphics.circle("line", gw / 2, gh / 2, 120)
     love.graphics.draw(level1BG)
     love.graphics.circle("line", gw / 2, gh / 2, 450)
     love.graphics.printf(string.format("%0.1f", timer), 0, gh*0.2, gw, "center")
@@ -108,7 +103,7 @@ end
 
 function maingame:gamepadpressed(joystick, button)
   if (button == "start" or button == "back" or button == "b") then
-    die()
+    maingame:die()
   end
   if (isEndGame) then
     restartButton:gamepadpressed(joystick, button)
@@ -118,7 +113,7 @@ end
 
 function maingame:keypressed(key)
   if (key == "escape") then
-    die()
+    maingame:die()
   end
 end
 
@@ -130,7 +125,7 @@ function maingame:loadLevel(index)
   maingame:restart()
 end
 
-function die()
+function maingame:die()
   isEndGame = true
   circle:clear()
   square:clear()
@@ -142,7 +137,7 @@ end
 function maingame:endScreen()
   love.graphics.setColor(0, 0, 0, 0.2)
   love.graphics.rectangle('fill', 0, 0, gw, gh)
-  
+
   love.graphics.setFont(bigScoreFont)
   if (restartButton:getHoverState()) then
     love.graphics.setColor(White)
@@ -177,6 +172,38 @@ function maingame:endLevel()
   statemanager:changeState("menu")
   gamemusic:stop()
   menumusic:play()
+end
+
+function maingame:getSong()
+  if (levelIndex == 1) then
+    return "Playing Chaoz Airflow"
+  elseif (levelIndex == 2) then
+    return "Playing Explorers"
+  elseif (levelIndex == 3) then
+    return "Playing Time Leaper"
+  elseif (levelIndex == 4) then
+    return "Playing Lunar Abyss"
+  elseif (levelIndex == 5) then
+    return "Playing Supernova"
+  elseif (levelIndex == 6) then
+    return "Playing Galaxy Collapse"
+  end
+end
+
+function maingame:getArtist()
+  if (levelIndex == 1) then
+    return "By ParagonX9"
+  elseif (levelIndex == 2) then
+    return "By Hinkik"
+  elseif (levelIndex == 3) then
+    return "By Hinkik"
+  elseif (levelIndex == 4) then
+    return "By Lchavasse"
+  elseif (levelIndex == 5) then
+    return "By Xtrullor"
+  elseif (levelIndex == 6) then
+    return "By Kurokotei"
+  end
 end
 
 return maingame

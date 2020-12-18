@@ -5,7 +5,6 @@ require 'globals'
 require 'colors'
 
 require 'managers/statemanager'
-require 'managers/gamemanager'
 
 local discordRPC = require 'lib/discordRPC'
 local appId = require 'applicationId'
@@ -34,8 +33,8 @@ end
 
 function discordApplyPresence()
   if statemanager:getState() == "game" then
-    detailsNow = "Playing Chaoz Airflow"
-    stateNow = "By ParagonX9"
+    detailsNow = maingame:getSong()
+    stateNow = maingame:getArtist()
   else
     detailsNow = "In Mainmenu"
     stateNow = ""

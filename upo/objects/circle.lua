@@ -1,20 +1,26 @@
 circle = {}
 listOfCircles = {}
 
-function createCircle(speed)
+function createCircle(speed, direction)
   local crl = {}
-  crl.rotation = math.random(0, math.pi*2)
-  crl.speed = -speed
-  crl.x = 500
-  crl.y = math.random(0,400)
-  
+  crl.rotation = math.random(2*math.pi*100)/100
+  if (direction == 0) then
+    crl.speed = -speed
+    crl.x = 500
+    crl.y = math.random(0,400)
+  elseif (direction == 1) then
+    crl.speed = speed
+    crl.x = 0
+    crl.y = 0
+  end
+
   table.insert(listOfCircles, crl)
 end
 
 function circle:update(dt)
   for i, v in ipairs(listOfCircles) do
     v.x = v.x + v.speed * dt
-    if (v.x < -500) then
+    if (v.x < -500 or v.x > 1000) then
       table.remove(listOfCircles, i)
     end
   end

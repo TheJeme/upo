@@ -9,7 +9,7 @@ function createKite(targetX, targetY, speed)
   kte.targetY = targetY
   kte.x = 1000
   kte.y = 0
-  
+
   table.insert(listOfKites, kte)
 end
 
