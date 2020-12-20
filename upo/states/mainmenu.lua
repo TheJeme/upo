@@ -53,6 +53,7 @@ function mainmenu:startLevel(levelIndex)
 end
 
 function mainmenu:saveSettings()
+  savemanager:saveSettings(resolutionIndex, volumeValue)
   if (changedResolution) then
     changedResolution = false
     simpleScale.updateWindow(resolutionList[resolutionIndex][1], resolutionList[resolutionIndex][2])
@@ -337,7 +338,7 @@ function mainmenu:levels()
   love.graphics.setColor(White)
   love.graphics.printf("ParagonX9 - Chaoz Airflow", 0, gh*0.1 + 30, gw, "center")
   love.graphics.setFont(levelScoreFont)
-  love.graphics.printf("Best Time: 123.12", 0, gh*0.1 + 70, gw, "center")
+  love.graphics.printf("Best Time: " .. savemanager.highscores.levelScore[1], 0, gh*0.1 + 70, gw, "center")
 
   love.graphics.setFont(levelTitleFont)
   if (level2Button:getHoverState()) then
@@ -356,7 +357,7 @@ function mainmenu:levels()
   love.graphics.setColor(White)
   love.graphics.printf("Hinkik - Explorers", 0, gh*0.1 + 120 + 30, gw, "center")
   love.graphics.setFont(levelScoreFont)
-  love.graphics.printf("Best Time: 123.12", 0, gh*0.1 + 70 + 120, gw, "center")
+  love.graphics.printf("Best Time: " .. savemanager.highscores.levelScore[2], 0, gh*0.1 + 70 + 120, gw, "center")
 
   love.graphics.setFont(levelTitleFont)
   if (level3Button:getHoverState()) then
@@ -376,7 +377,7 @@ function mainmenu:levels()
   love.graphics.setColor(White)
   love.graphics.printf("Hinkik - Time Leaper", 0, gh*0.1 + 240 + 30, gw, "center")
   love.graphics.setFont(levelScoreFont)
-  love.graphics.printf("Best Time: 123.12", 0, gh*0.1 + 240 + 70, gw, "center")
+  love.graphics.printf("Best Time: " .. savemanager.highscores.levelScore[3], 0, gh*0.1 + 240 + 70, gw, "center")
 
   love.graphics.setFont(levelTitleFont)
   if (level4Button:getHoverState()) then
@@ -395,7 +396,7 @@ function mainmenu:levels()
   love.graphics.setColor(White)
   love.graphics.printf("Lchavasse - Lunar Abyss", 0, gh*0.1 + 360 + 30, gw, "center")
   love.graphics.setFont(levelScoreFont)
-  love.graphics.printf("Best Time: 123.12", 0, gh*0.1 + 360 + 70, gw, "center")
+  love.graphics.printf("Best Time: " .. savemanager.highscores.levelScore[4], 0, gh*0.1 + 360 + 70, gw, "center")
 
   love.graphics.setFont(levelTitleFont)
   if (level5Button:getHoverState()) then
@@ -414,7 +415,7 @@ function mainmenu:levels()
   love.graphics.setColor(White)
   love.graphics.printf("Xtrullor - Supernova", 0, gh*0.1 + 480 + 30, gw, "center")
   love.graphics.setFont(levelScoreFont)
-  love.graphics.printf("Best Time: 123.12", 0, gh*0.1 + 480 + 70, gw, "center")
+  love.graphics.printf("Best Time: " .. savemanager.highscores.levelScore[5], 0, gh*0.1 + 480 + 70, gw, "center")
 
   love.graphics.setFont(levelTitleFont)
   if (level6Button:getHoverState()) then
@@ -433,7 +434,7 @@ function mainmenu:levels()
   love.graphics.setColor(White)
   love.graphics.printf("Kurototei - Galaxy Collapse", 0, gh*0.1 + 600 + 30, gw, "center")
   love.graphics.setFont(levelScoreFont)
-  love.graphics.printf("Best Time: 123.12", 0, gh*0.1 + 600 + 70, gw, "center")
+  love.graphics.printf("Best Time: " .. savemanager.highscores.levelScore[6], 0, gh*0.1 + 600 + 70, gw, "center")
 
   love.graphics.setFont(levelTitleFont)
   if (levelBackButton:getHoverState()) then

@@ -132,6 +132,11 @@ function maingame:die()
   kite:clear()
   triangle:clear()
   gamemusic:stop()
+  
+  if (timer > savemanager.highscores.levelScore[levelIndex]) then
+    savemanager.highscores.levelScore[levelIndex] = tonumber(string.format("%0.1f", timer))
+    savemanager:saveHighscores()
+  end
 end
 
 function maingame:endScreen()
@@ -176,33 +181,33 @@ end
 
 function maingame:getSong()
   if (levelIndex == 1) then
-    return "Playing Chaoz Airflow"
+    return "Chaoz Airflow"
   elseif (levelIndex == 2) then
-    return "Playing Explorers"
+    return "Explorers"
   elseif (levelIndex == 3) then
-    return "Playing Time Leaper"
+    return "Time Leaper"
   elseif (levelIndex == 4) then
-    return "Playing Lunar Abyss"
+    return "Lunar Abyss"
   elseif (levelIndex == 5) then
-    return "Playing Supernova"
+    return "Supernova"
   elseif (levelIndex == 6) then
-    return "Playing Galaxy Collapse"
+    return "Galaxy Collapse"
   end
 end
 
 function maingame:getArtist()
   if (levelIndex == 1) then
-    return "By ParagonX9"
+    return "ParagonX9"
   elseif (levelIndex == 2) then
-    return "By Hinkik"
+    return "Hinkik"
   elseif (levelIndex == 3) then
-    return "By Hinkik"
+    return "Hinkik"
   elseif (levelIndex == 4) then
-    return "By Lchavasse"
+    return "Lchavasse"
   elseif (levelIndex == 5) then
-    return "By Xtrullor"
+    return "Xtrullor"
   elseif (levelIndex == 6) then
-    return "By Kurokotei"
+    return "Kurokotei"
   end
 end
 

@@ -5,17 +5,21 @@ require 'globals'
 require 'colors'
 
 require 'managers/statemanager'
+require 'managers/savemanager'
 
 local discordRPC = require 'lib/discordRPC'
 local appId = require 'applicationId'
 
 function love.load()
+  savemanager:load()
+  volumeValue = savemanager.settings.volume
+  resolutionIndex = savemanager.settings.resolutionIndex
+  statemanager:load()
   math.randomseed(os.time())
   simpleScale.setWindow(gw, gh, resolutionList[resolutionIndex][1], resolutionList[resolutionIndex][2], {fullscreen = true})
   love.window.setVSync(0)
   cursor:load()
   beloved:load()
-  statemanager:load()
   love.graphics.setBackgroundColor(0.1, 0.1, 0.1, 1)
   love.mouse.setVisible(false)
 
@@ -33,8 +37,8 @@ end
 
 function discordApplyPresence()
   if statemanager:getState() == "game" then
-    detailsNow = maingame:getSong()
-    stateNow = maingame:getArtist()
+    detailsNow = "Playing " .. maingame:getSong()
+    stateNow = "By " .. maingame:getArtist()
   else
     detailsNow = "In Mainmenu"
     stateNow = ""
