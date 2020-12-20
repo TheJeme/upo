@@ -7,6 +7,7 @@ require 'objects/square'
 require 'objects/kite'
 require 'objects/triangle'
 
+local effectcircle = require 'objects/effectcircle'
 local audio = require "lib/wave"
 
 maingame = {}
@@ -34,6 +35,7 @@ function maingame:load()
 end
 
 function maingame:update(dt)
+  effectcircle:update(dt)
   cursor:update(dt, isEndGame, levelIndex)
   if (isEndGame) then
     restartButton:update(dt)
@@ -87,7 +89,7 @@ function maingame:draw()
     love.graphics.circle("line", gw / 2, gh / 2, 450)
     love.graphics.printf(string.format("%0.1f", timer), 0, gh*0.2, gw, "center")
   end
-
+  effectcircle:draw()
   cursor:draw(isEndGame, levelIndex)
   if (isEndGame) then
     maingame:endScreen()
