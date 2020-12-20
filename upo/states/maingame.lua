@@ -6,6 +6,8 @@ require 'objects/circle'
 require 'objects/square'
 require 'objects/kite'
 require 'objects/triangle'
+require 'objects/laser'
+require 'objects/laser2'
 
 local effectcircle = require 'objects/effectcircle'
 local audio = require "lib/wave"
@@ -47,6 +49,8 @@ function maingame:update(dt)
     square:update(dt)
     kite:update(dt)
     triangle:update(dt)
+    laser:update(dt)
+    laser2:update(dt)
 
     timer = timer + dt
     levelmanager:update(dt, timer, levelIndex)
@@ -62,6 +66,8 @@ function maingame:draw()
     square:draw()
     kite:draw()
     triangle:draw()
+    laser:draw()
+    laser2:draw()
   end
 
   love.graphics.setColor(White)
@@ -133,6 +139,8 @@ function maingame:die()
   square:clear()
   kite:clear()
   triangle:clear()
+  laser:clear()
+  laser2:clear()
   gamemusic:stop()
   
   if (timer > savemanager.highscores.levelScore[levelIndex]) then
