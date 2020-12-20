@@ -10,22 +10,22 @@ function createLaser2(speed)
     lsr.x = 0
     lsr.y = -20
     lsr.width = gw
-    lsr.height = 16
+    lsr.height = 24
   elseif (lsr.direction == 2) then
-    lsr.x = 520
+    lsr.x = 500
     lsr.y = 0
-    lsr.width = 16
+    lsr.width = 24
     lsr.height = gh
   elseif (lsr.direction == 3) then
     lsr.x = 1450
     lsr.y = 0
-    lsr.width = 16
+    lsr.width = 24
     lsr.height = gh
   elseif (lsr.direction == 4) then
     lsr.x = 0
     lsr.y = gh+20
     lsr.width = gw
-    lsr.height = 16
+    lsr.height = 24
   end
   
   table.insert(listOflasers2, lsr)

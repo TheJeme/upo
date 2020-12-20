@@ -9,8 +9,8 @@ function level01:update(dt, timer)
     respawnTime = 0
     --createCircle(320+timer*7, 0)
     --createSquare(220)
-    createLaser(500)
-    --createLaser2(400)
+    --createLaser(500)
+    createLaser2(400)
     --createKite(cursor:getPositionX(), cursor:getPositionY(), 420+timer*2)
   else
     respawnTime = respawnTime + dt
