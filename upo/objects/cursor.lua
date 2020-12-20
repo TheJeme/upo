@@ -18,10 +18,10 @@ function cursor:update(dt, isEndGame, levelIndex)
   end
     
   if (isJoystickMove and joystick ~= nil) then
-    if (math.abs(joystick:getGamepadAxis("leftx")) > 0.05 or math.abs(joystick:getGamepadAxis("lefty")) > 0.05) then
+    if (math.abs(joystick:getGamepadAxis("leftx")) > 0.06 or math.abs(joystick:getGamepadAxis("lefty")) > 0.06) then
       cursorMX = cursorMX + joystick:getGamepadAxis("leftx") * dt * 800
       cursorMY = cursorMY + joystick:getGamepadAxis("lefty") * dt * 800
-    elseif (math.abs(joystick:getGamepadAxis("rightx")) > 0.05 or math.abs(joystick:getGamepadAxis("righty")) > 0.05) then
+    elseif (math.abs(joystick:getGamepadAxis("rightx")) > 0.06 or math.abs(joystick:getGamepadAxis("righty")) > 0.06) then
       cursorMX = cursorMX + joystick:getGamepadAxis("rightx") * dt * 800
       cursorMY = cursorMY + joystick:getGamepadAxis("righty") * dt * 800
     end
