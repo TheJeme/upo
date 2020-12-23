@@ -1,5 +1,5 @@
 laser2 = {}
-listOflasers2 = {}
+listOfLasers2 = {}
 
 function createLaser2(speed)
   local lsr = {}
@@ -28,11 +28,11 @@ function createLaser2(speed)
     lsr.height = 24
   end
   
-  table.insert(listOflasers2, lsr)
+  table.insert(listOfLasers2, lsr)
 end
 
 function laser2:update(dt)
-  for i, v in ipairs(listOflasers2) do
+  for i, v in ipairs(listOfLasers2) do
     if (v.direction == 1) then
       if (v.phase == 1) then
         v.y = v.y + v.speed * dt
@@ -72,21 +72,21 @@ function laser2:update(dt)
     end  
     
     if (math.abs(v.x) > 1800 or math.abs(v.y) > 1800) then
-      table.remove(listOflasers2, i)
+      table.remove(listOfLasers2, i)
     end
   end
 end
 
 function laser2:draw()
-    for i, v in ipairs(listOflasers2) do
+    for i, v in ipairs(listOfLasers2) do
       love.graphics.setColor(28 / 255, 31 / 255, 39 / 255, 1)
       love.graphics.rectangle("fill", v.x, v.y, v.width, v.height)
     end
 end
 
 function laser2:clear()
-  for i in pairs(listOflasers2) do
-    listOflasers2[i] = nil
+  for i in pairs(listOfLasers2) do
+    listOfLasers2[i] = nil
   end
 end
 

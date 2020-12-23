@@ -1,3 +1,4 @@
+require 'objects/collision'
 cursortrail_array = require 'objects/cursortrail_array'
 
 cursor = {}
@@ -56,6 +57,12 @@ function cursor:update(dt, isEndGame, levelIndex)
     end
 
   elseif (statemanager:getState() == "game" and not isEndGame) then
+    cursor:checkCollisionForCircles()
+    cursor:checkCollisionForKites()
+    cursor:checkCollisionForLasers()
+    cursor:checkCollisionForLasers2()
+    cursor:checkCollisionForTriangles()
+    
     if (levelIndex == 4) then
       if (dist < (225-19)) then
         cursorPosX = cursorMX
@@ -132,7 +139,6 @@ function cursor:draw(isEndGame, levelIndex)
     love.graphics.setColor(White)
     love.graphics.circle('line', -cursorPosX+gw, -cursorPosY+gh, 15, 120)
   end
-
 end
 
 function cursor:getPositionX()
@@ -141,6 +147,47 @@ end
 
 function cursor:getPositionY()
   return cursorPosY
+end
+
+
+function cursor:checkCollisionForCircles()
+  for i, v in ipairs(listOfCircles) do
+    if (circleDetect(cursor:getPositionX(), cursor:getPositionY(), v.x, v.y, 45)) then
+      maingame:die()
+    end
+  end
+end
+
+function cursor:checkCollisionForKites()
+  for i, v in ipairs(listOfTriangles) do
+    if (rectangleDetect(cursor:getPositionX(), cursor:getPositionY(), v.x, v.y, 30, 30)) then
+      maingame:die()
+    end
+  end
+end
+
+function cursor:checkCollisionForLasers()
+  for i, v in ipairs(listOfLasers) do
+    if (rectangleDetect(cursor:getPositionX(), cursor:getPositionY(), v.x, v.y, v.width, v.height)) then
+      maingame:die()
+    end
+  end
+end
+
+function cursor:checkCollisionForLasers2()
+  for i, v in ipairs(listOfLasers2) do
+    if (rectangleDetect(cursor:getPositionX(), cursor:getPositionY(), v.x, v.y, v.width, v.height)) then
+      maingame:die()
+    end
+  end
+end
+
+function cursor:checkCollisionForTriangles()
+  for i, v in ipairs(listOfTriangles) do
+    if (circleDetect(cursor:getPositionX(), cursor:getPositionY(), v.x+1.26, v.y+1.2, 1.74)) then
+      maingame:die()
+    end
+  end
 end
 
 return cursor

@@ -27,14 +27,14 @@ function circle:update(dt)
 end
 
 function circle:draw()
-    for i, v in ipairs(listOfCircles) do
-      love.graphics.push()
-      love.graphics.translate(gw / 2, gh / 2)
-      love.graphics.rotate(v.rotation)
-      love.graphics.setColor(28 / 255, 31 / 255, 39 / 255, 1)
-      love.graphics.circle("fill", v.x, v.y, 45)
-      love.graphics.pop()
-    end
+  for i, v in ipairs(listOfCircles) do
+    love.graphics.push()
+    love.graphics.translate(gw / 2, gh / 2)
+    love.graphics.rotate(v.rotation)
+    love.graphics.setColor(28 / 255, 31 / 255, 39 / 255, 1)
+    love.graphics.circle("fill", v.x, v.y, 45)
+    love.graphics.pop()
+  end
 end
 
 function circle:clear()
