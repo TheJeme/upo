@@ -170,7 +170,7 @@ end
 
 function cursor:checkCollisionForKites()
   for i, v in ipairs(listOfKites) do
-    if (circleDetect(cursor:getPositionX(), cursor:getPositionY(), math.sin(v.rotation)*v.x+gw/2, math.cos(v.rotation)*v.x+gh/2, 18)) then
+    if (circleDetect(cursor:getPositionX(), cursor:getPositionY(), math.sin(v.rotation)*v.x+v.targetX, math.cos(v.rotation)*v.x+v.targetY, 18)) then
       maingame:die()
     end
   end
@@ -194,7 +194,7 @@ end
 
 function cursor:checkCollisionForTriangles()
   for i, v in ipairs(listOfTriangles) do
-    if (circleDetect(cursor:getPositionX(), cursor:getPositionY(), v.x+1.26, v.y+1.2, 1.74)) then
+    if (circleDetect(cursor:getPositionX(), cursor:getPositionY(), v.x+v.targetX, v.y+v.targetY, 7)) then
       maingame:die()
     end
   end

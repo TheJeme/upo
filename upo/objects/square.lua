@@ -38,14 +38,15 @@ function square:update(dt)
     end
     
     if (v.timeTillExplode < 0) then
-      createTriangle(v.x+15, v.y+15, 0, 420)
-      createTriangle(v.x+15, v.y+15, math.pi/2, 420)
-      createTriangle(v.x+15, v.y+15, math.pi, 420)
-      createTriangle(v.x+15, v.y+15, 3*math.pi/4, 420)
-      createTriangle(v.x+15, v.y+15, math.pi/4, 420)
-      createTriangle(v.x+15, v.y+15, 7*math.pi/4, 420)
-      createTriangle(v.x+15, v.y+15, 5*math.pi/4, 420)
-      createTriangle(v.x+15, v.y+15, 3*math.pi/2, 420)
+      createTriangle(v.x, v.y, 1, 320)
+      createTriangle(v.x, v.y, 2, 320)
+      createTriangle(v.x, v.y, 3, 320)
+      createTriangle(v.x, v.y, 4, 320)
+      createTriangle(v.x, v.y, 5, 320)
+      createTriangle(v.x, v.y, 6, 320)
+      createTriangle(v.x, v.y, 7, 320)
+      createTriangle(v.x, v.y, 8, 320)
+      
       table.remove(listOfSquares, i)      
     end
   end
@@ -54,7 +55,8 @@ end
 function square:draw()
     for i, v in ipairs(listOfSquares) do
       love.graphics.setColor(28 / 255, 31 / 255, 39 / 255, 1)
-      love.graphics.rectangle("fill", v.x, v.y, 30, 30, 4)
+      love.graphics.circle("fill", v.x+15, v.y+15, 22, 4)
+      love.graphics.rectangle("fill", v.x, v.y, 30, 30)
     end
 end
 
