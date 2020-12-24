@@ -24,12 +24,8 @@ end
 
 function kite:draw()
     for _, v in ipairs(listOfKites) do
-      love.graphics.push()
-      love.graphics.translate(v.targetX, v.targetY)
-      love.graphics.rotate(v.rotation)
       love.graphics.setColor(28 / 255, 31 / 255, 39 / 255, 1)
-      love.graphics.circle("fill", v.x, v.y, 28, 4)
-      love.graphics.pop()
+      love.graphics.circle("fill", math.sin(v.rotation)*v.x+gw/2, math.cos(v.rotation)*v.x+gh/2, 28, 4)
     end
 end
 

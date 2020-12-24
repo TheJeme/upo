@@ -28,12 +28,9 @@ end
 
 function circle:draw()
   for i, v in ipairs(listOfCircles) do
-    love.graphics.push()
-    love.graphics.translate(gw / 2, gh / 2)
-    love.graphics.rotate(v.rotation)
     love.graphics.setColor(28 / 255, 31 / 255, 39 / 255, 1)
-    love.graphics.circle("fill", v.x, v.y, 45)
-    love.graphics.pop()
+    love.graphics.circle("fill", math.sin(v.rotation)*v.x - math.cos(v.rotation)*v.y + gw/2,
+                                 math.cos(v.rotation)*v.x + math.sin(v.rotation)*v.y + gh/2, 45)
   end
 end
 

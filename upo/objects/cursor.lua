@@ -58,6 +58,7 @@ function cursor:update(dt, isEndGame, levelIndex)
 
   elseif (statemanager:getState() == "game" and not isEndGame) then
     cursor:checkCollisionForCircles()
+    cursor:checkCollisionForSquares()
     cursor:checkCollisionForKites()
     cursor:checkCollisionForLasers()
     cursor:checkCollisionForLasers2()
@@ -152,15 +153,24 @@ end
 
 function cursor:checkCollisionForCircles()
   for i, v in ipairs(listOfCircles) do
-    if (circleDetect(cursor:getPositionX(), cursor:getPositionY(), v.x, v.y, 45)) then
+    if (circleDetect(cursor:getPositionX(), cursor:getPositionY(), math.sin(v.rotation)*v.x - math.cos(v.rotation)*v.y + gw/2, 
+                            math.cos(v.rotation)*v.x + math.sin(v.rotation)*v.y + gh/2, 45)) then
+      maingame:die()
+    end
+  end
+end
+
+function cursor:checkCollisionForSquares()
+  for i, v in ipairs(listOfSquares) do
+    if (rectangleDetect(cursor:getPositionX(), cursor:getPositionY(), v.x-10, v.y-10, 30+20, 30+20)) then
       maingame:die()
     end
   end
 end
 
 function cursor:checkCollisionForKites()
-  for i, v in ipairs(listOfTriangles) do
-    if (rectangleDetect(cursor:getPositionX(), cursor:getPositionY(), v.x, v.y, 30, 30)) then
+  for i, v in ipairs(listOfKites) do
+    if (circleDetect(cursor:getPositionX(), cursor:getPositionY(), math.sin(v.rotation)*v.x+gw/2, math.cos(v.rotation)*v.x+gh/2, 18)) then
       maingame:die()
     end
   end
