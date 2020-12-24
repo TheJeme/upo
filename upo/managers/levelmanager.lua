@@ -7,13 +7,20 @@ require 'levels/level06'
 
 levelmanager = {}
 
-function levelmanager:load()
-  level01:load()
-  level02:load()
-  level03:load()
-  level04:load()
-  level05:load()
-  level06:load()
+function levelmanager:loadLevel(levelIndex)
+  if (levelIndex == 1) then
+    level01:load()
+  elseif (levelIndex == 2) then
+    level02:load()
+  elseif (levelIndex == 3) then
+    level03:load()
+  elseif (levelIndex == 4) then
+    level04:load()
+  elseif (levelIndex == 5) then
+    level05:load()
+  elseif (levelIndex == 6) then
+    level06:load()
+  end
 end
 
 function levelmanager:update(dt, timer, levelIndex)
@@ -30,10 +37,6 @@ function levelmanager:update(dt, timer, levelIndex)
   elseif (levelIndex == 6) then
     level06:update(dt, timer)
   end
-end
-
-function levelmanager:draw()
-
 end
 
 return levelmanager

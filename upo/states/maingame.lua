@@ -3,6 +3,7 @@ require 'managers/levelmanager'
 require 'objects/cursor'
 
 require 'objects/circle'
+require 'objects/circle2'
 require 'objects/square'
 require 'objects/kite'
 require 'objects/triangle'
@@ -32,8 +33,6 @@ local timer
 function maingame:load()
   restartButton = newButton(gw/2 - 200, gh*0.44, 400, 130, function() maingame:restart() end)
   exitButton = newButton(gw/2 - 200, gh*0.56, 400, 130, function() maingame:endLevel() end)
-
-  levelmanager:load()
 end
 
 function maingame:update(dt)
@@ -46,6 +45,7 @@ function maingame:update(dt)
 
   if not (isEndGame) then
     circle:update(dt)
+    circle2:update(dt)
     square:update(dt)
     kite:update(dt)
     triangle:update(dt)
@@ -62,7 +62,8 @@ function maingame:draw()
     love.graphics.setLineWidth(4)
   love.graphics.circle("fill", gw / 2, gh / 2, 450)
   if not (isEndGame) then
-    circle:draw(isEndGame)
+    circle:draw()
+    circle2:draw()
     square:draw()
     kite:draw()
     triangle:draw()
@@ -131,11 +132,13 @@ function maingame:loadLevel(index)
   gamemusic:setVolume(volumeValue * 0.01)
   gamemusic:setLooping(true)
   maingame:restart()
+  levelmanager:loadLevel(levelIndex)
 end
 
 function maingame:die()
   isEndGame = true
   circle:clear()
+  circle2:clear()
   square:clear()
   kite:clear()
   triangle:clear()

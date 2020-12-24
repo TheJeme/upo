@@ -46,7 +46,7 @@ function discordApplyPresence()
 
   presence = {
     largeImageKey = "icon",
-    largeImageText = "upo v0.0.7",
+    largeImageText = "upo v0.0.8",
     details = detailsNow,
     state = stateNow,
     startTimestamp = now,

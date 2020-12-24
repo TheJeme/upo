@@ -8,7 +8,6 @@ function createKite(targetX, targetY, speed)
   kte.targetX = targetX
   kte.targetY = targetY
   kte.x = 1000
-  kte.y = 0
 
   table.insert(listOfKites, kte)
 end
@@ -23,14 +22,14 @@ function kite:update(dt)
 end
 
 function kite:draw()
-    for _, v in ipairs(listOfKites) do      
-      love.graphics.push()
-      love.graphics.translate(math.sin(v.rotation)*v.x+v.targetX, math.cos(v.rotation)*v.x+v.targetY)
-      love.graphics.rotate(v.rotation)
-      love.graphics.setColor(28 / 255, 31 / 255, 39 / 255, 1)
-      love.graphics.circle("fill", 0, 0, 28, 4)
-      love.graphics.pop()            
-    end
+  for _, v in ipairs(listOfKites) do      
+    love.graphics.push()
+    love.graphics.translate(math.sin(v.rotation)*v.x+v.targetX, math.cos(v.rotation)*v.x+v.targetY)
+    love.graphics.rotate(v.rotation)
+    love.graphics.setColor(28 / 255, 31 / 255, 39 / 255, 1)
+    love.graphics.circle("fill", 0, 0, 28, 4)
+    love.graphics.pop()            
+  end
 end
 
 function kite:clear()
