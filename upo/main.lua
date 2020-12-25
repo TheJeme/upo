@@ -75,7 +75,7 @@ function love.draw()
 	simpleScale.unSet()
   beloved:draw()
   love.graphics.setFont(levelScoreFont)
-  love.graphics.print("FPS " .. love.filesystem.getSaveDirectory())
+  love.graphics.print("FPS " .. love.timer.getFPS())
 end
 
 function love.mousepressed(x, y, button)
