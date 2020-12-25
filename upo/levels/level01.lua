@@ -8,9 +8,7 @@ end
 
 function level01:update(dt, timer)
   if (respawnTime >= 5/math.sqrt(timer)) then
-    respawnTime = 0
-    --createLaser2(300)
-    
+    respawnTime = 0  
     createCircle(420+timer*3, 0)
     createCircle(420+timer*3, 0)
     createCircle(420+timer*3, 0)

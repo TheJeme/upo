@@ -57,7 +57,13 @@ function cursor:update(dt, isEndGame, levelIndex)
     end
 
   elseif (statemanager:getState() == "game" and not isEndGame) then
-
+    cursor:checkCollisionForCircles()
+    cursor:checkCollisionForCircles2()
+    cursor:checkCollisionForSquares()
+    cursor:checkCollisionForKites()
+    cursor:checkCollisionForLasers()
+    cursor:checkCollisionForLasers2()
+    cursor:checkCollisionForTriangles()
     
     if (levelIndex == 4) then
       if (dist < (225-19)) then

@@ -12,8 +12,8 @@ local appId = require 'applicationId'
 
 function love.load()
   savemanager:load()
-  volumeValue = savemanager.settings.volume
-  resolutionIndex = savemanager.settings.resolutionIndex
+  volumeValue = savemanager.settings.volume or 5
+  resolutionIndex = savemanager.settings.resolutionIndex or 3
   statemanager:load()
   math.randomseed(os.time())
   simpleScale.setWindow(gw, gh, resolutionList[resolutionIndex][1], resolutionList[resolutionIndex][2], {fullscreen = true})
@@ -75,7 +75,7 @@ function love.draw()
 	simpleScale.unSet()
   beloved:draw()
   love.graphics.setFont(levelScoreFont)
-  love.graphics.print("FPS " .. love.timer.getFPS())
+  love.graphics.print("FPS " .. love.filesystem.getSaveDirectory())
 end
 
 function love.mousepressed(x, y, button)

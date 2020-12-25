@@ -17,7 +17,6 @@ function savemanager:load()
   if not love.filesystem.getInfo("highscores.txt") then
     highscores = {}
     highscores.levelScore = {0, 0, 0, 0, 0, 0}
-    
     love.filesystem.write("highscores.txt", serialize(highscores))
   end
   
