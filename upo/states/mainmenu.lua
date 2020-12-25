@@ -10,6 +10,14 @@ mainmenu = {}
 function mainmenu:load()
   menustate = "main"
 
+  buttonhover = audio:newSource("assets/buttonhover.wav", "stream")
+  buttonhover:setVolume(volumeValue * 0.01)
+  buttonhover:setLooping(false)
+  
+  buttonhit = audio:newSource("assets/buttonhit2.wav", "stream")
+  buttonhit:setVolume(volumeValue * 0.01)
+  buttonhit:setLooping(false)
+
   menumusic = audio:newSource("songs/Hinkik - Ena.mp3", "stream")
   menumusic:parse()
   menumusic:setIntensity(20)
@@ -17,7 +25,7 @@ function mainmenu:load()
   menumusic:setVolume(volumeValue * 0.01)
   menumusic:setLooping(true)
   menumusic:play()
-
+    
   menumusic:onBeat(function()
     newCircleEffect(450+menumusic:getEnergy()*10, 190)
   end)

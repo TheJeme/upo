@@ -18,7 +18,10 @@ function button:update(dt)
   self.isMouseOnButton = cursorMX > self.x and cursorMX < self.x + self.width and
                           cursorMY > self.y and cursorMY < self.y + self.height                                       
   if self.isMouseOnButton then
-    self.hover = true
+    if (self.hover == false) then
+      self.hover = true
+      buttonhover:play()
+    end
   else
     self.hover = false
   end
@@ -27,8 +30,10 @@ end
 function button:mousepressed(x, y, button)
   if self.isMouseOnButton and (button == 1) then
     self.func()
+    buttonhit:play()
   elseif self.isMouseOnButton and button == 2 then
     self.func2()
+    buttonhit:play()
   end
 end
 
