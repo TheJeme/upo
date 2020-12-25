@@ -57,13 +57,7 @@ function cursor:update(dt, isEndGame, levelIndex)
     end
 
   elseif (statemanager:getState() == "game" and not isEndGame) then
-    cursor:checkCollisionForCircles()
-    cursor:checkCollisionForCircles2()
-    cursor:checkCollisionForSquares()
-    cursor:checkCollisionForKites()
-    cursor:checkCollisionForLasers()
-    cursor:checkCollisionForLasers2()
-    cursor:checkCollisionForTriangles()
+
     
     if (levelIndex == 4) then
       if (dist < (225-19)) then
@@ -111,35 +105,6 @@ function cursor:draw(isEndGame, levelIndex)
     else
       love.graphics.print("Joystick movement disabled", cursorPosX-200, cursorPosY-50)
     end
-  end
-  love.graphics.setColor(White)
-  if (levelIndex == 2) then
-    if (isEndGame) then
-      love.graphics.setColor(Red)
-    else
-      love.graphics.setColor(DarkBlue)
-    end
-    love.graphics.circle('fill', -cursorPosX+gw, cursorPosY, 15, 120)
-    love.graphics.setColor(White)
-    love.graphics.circle('line', -cursorPosX+gw, cursorPosY, 15, 120)
-    
-    if (isEndGame) then
-      love.graphics.setColor(Red)
-    else
-      love.graphics.setColor(DarkBlue)
-    end
-    love.graphics.circle('fill', cursorPosX, -cursorPosY+gh, 15, 120)
-    love.graphics.setColor(White)
-    love.graphics.circle('line', cursorPosX, -cursorPosY+gh, 15, 120)
-    
-    if (isEndGame) then
-      love.graphics.setColor(Red)
-    else
-      love.graphics.setColor(DarkBlue)
-    end
-    love.graphics.circle('fill', -cursorPosX+gw, -cursorPosY+gh, 15, 120)
-    love.graphics.setColor(White)
-    love.graphics.circle('line', -cursorPosX+gw, -cursorPosY+gh, 15, 120)
   end
 end
 

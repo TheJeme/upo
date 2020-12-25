@@ -9,10 +9,10 @@ function level03:load()
 end
 
 function level03:update(dt, timer)
-  if (round > 10) then
+  if (round > 13) then
     if (respawnTime2 > 0.4) then
       respawnTime2 = 0
-      createCircle2(cursor:getPositionX(), cursor:getPositionY(), 520+timer*5)
+      createCircle2(cursor:getPositionX(), cursor:getPositionY(), 520+timer*4)
     else
       respawnTime2 = respawnTime2 + dt
     end
@@ -21,14 +21,22 @@ function level03:update(dt, timer)
   if (respawnTime > 2/math.sqrt(timer)) then
     respawnTime = 0
     round = round + 1    
-    createCircle(460+timer*5, 1)
-    createCircle(460+timer*5, 1)
-    createCircle(460+timer*5, 1)
-    createCircle(460+timer*5, 1)
-    createCircle(460+timer*5, 1)
-    createCircle(460+timer*5, 1)
-    createCircle(460+timer*5, 1)
-    createCircle(460+timer*5, 1)
+    createCircle(430+timer*4, 1)
+    createCircle(430+timer*4, 1)
+    createCircle(430+timer*4, 1)
+    createCircle(430+timer*4, 1)
+    if (round > 15) then
+      createCircle(430+timer*4, 1)
+    end
+    if (round > 15) then
+      createCircle(430+timer*4, 1)
+    end
+    if (round > 20) then
+      createCircle(430+timer*4, 1)
+    end
+    if (round > 25) then
+      createCircle(430+timer*4, 1)
+    end
     
     trnAngle = math.random(0, 2*math.pi*100) / 100
   else
