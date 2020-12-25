@@ -1,4 +1,3 @@
-require 'lib/beloved'
 require 'lib/simpleScale'
 
 require 'globals'
@@ -19,7 +18,6 @@ function love.load()
   simpleScale.setWindow(gw, gh, resolutionList[resolutionIndex][1], resolutionList[resolutionIndex][2], {fullscreen = true})
   love.window.setVSync(0)
   cursor:load()
-  beloved:load()
   love.graphics.setBackgroundColor(0.1, 0.1, 0.1, 1)
   love.mouse.setVisible(false)
 
@@ -73,13 +71,9 @@ function love.draw()
 	simpleScale.set()
     statemanager:draw()
 	simpleScale.unSet()
-  beloved:draw()
-  love.graphics.setFont(levelScoreFont)
-  love.graphics.print("FPS " .. love.timer.getFPS())
 end
 
 function love.mousepressed(x, y, button)
-  beloved:mousepressed(x, y, button)
   statemanager:mousepressed(x, y, button)
 end
 
@@ -92,7 +86,6 @@ function love.gamepadpressed(joystick, button)
 end
 
 function love.keypressed(key)
-  beloved:keypressed(key)
   statemanager:keypressed(key)
   if (key == "y" and statemanager:getState() == "menu" and joystick ~= nil) then
     isJoystickMove = not isJoystickMove
