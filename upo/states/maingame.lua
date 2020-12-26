@@ -177,10 +177,12 @@ function maingame:endScreen()
 
   love.graphics.setFont(levelScoreFont)
   love.graphics.setColor(White)
-  if (levelIndex == 4) then
-    love.graphics.printf("NEW PERSONAL BEST", 0, gh*0.37, gw, "center")
-  else
-    love.graphics.printf("NEW PERSONAL BEST", 0, gh*0.17, gw, "center")
+  if (timer > savemanager.highscores.levelScore[levelIndex]) then
+    if (levelIndex == 4) then
+      love.graphics.printf("NEW PERSONAL BEST", 0, gh*0.37, gw, "center")
+    else
+      love.graphics.printf("NEW PERSONAL BEST", 0, gh*0.17, gw, "center")
+    end
   end
 end
 
