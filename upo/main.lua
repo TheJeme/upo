@@ -11,7 +11,7 @@ local appId = require 'applicationId'
 
 function love.load()
   savemanager:load()
-  volumeValue = savemanager.settings.volume or 5
+  volumeValue = savemanager.settings.volume or 100
   resolutionIndex = savemanager.settings.resolutionIndex or 3
   statemanager:load()
   math.randomseed(os.time())

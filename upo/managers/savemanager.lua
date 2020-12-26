@@ -6,7 +6,7 @@ function savemanager:load()
   if not love.filesystem.getInfo("settings.txt") then
     settings = {}
     settings.resolutionIndex = 2
-    settings.volume = 5
+    settings.volume = 100
     
     love.filesystem.write("settings.txt", serialize(settings))
   end

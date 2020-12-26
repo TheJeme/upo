@@ -35,7 +35,7 @@ function maingame:load()
   exitButton = newButton(gw/2 - 200, gh*0.56, 400, 130, function() maingame:endLevel() end)
   
   failsound = audio:newSource("assets/failsound.wav", "stream")
-  failsound:setVolume(volumeValue * 0.01)
+  failsound:setVolume(volumeValue * 0.001)
   failsound:setLooping(false)
 end
 
@@ -133,7 +133,7 @@ end
 function maingame:loadLevel(index)
   levelIndex = index
   gamemusic = levelSongs[levelIndex]
-  gamemusic:setVolume(volumeValue * 0.01)
+  gamemusic:setVolume(volumeValue * 0.001)
   gamemusic:setLooping(true)
   maingame:restart()
 end
