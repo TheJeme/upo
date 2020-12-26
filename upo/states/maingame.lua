@@ -115,7 +115,7 @@ function maingame:mousepressed(x, y, button)
 end
 
 function maingame:gamepadpressed(joystick, button)
-  if (button == "start" or button == "back" or button == "b") then
+  if (button == "start" or button == "back") then
     maingame:die()
   end
   if (isEndGame) then

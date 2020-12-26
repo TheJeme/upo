@@ -5,11 +5,12 @@ function level04:load()
 end
 
 function level04:update(dt, timer)
-  if (respawnTime >= 3/math.sqrt(timer)) then
+  if (respawnTime >= 6/math.sqrt(timer)+1) then
     respawnTime = 0
-    createCircle(220+timer*5, 0)
-    createSquare(220)
-    createKite(cursor:getPositionX(), cursor:getPositionY(), 310+timer*2)
+    createCircle(45, 220+timer*1.7, math.random(2*math.pi*100)/100, 0)
+    createSquare(220, 200)
+    createLaser(250)
+    createKite(cursor:getPositionX(), cursor:getPositionY(), 300+timer*0.7)
   else
     respawnTime = respawnTime + dt
   end

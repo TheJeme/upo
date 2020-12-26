@@ -1,10 +1,11 @@
 circle2 = {}
 listOfCircles2 = {}
 
-function createCircle2(targetX, targetY, speed)
+function createCircle2(targetX, targetY, radius, speed)
   local crl = {}
   crl.targetX = targetX
   crl.targetY = targetY
+  crl.radius = radius
   crl.speed = -speed
   crl.x = gw/2
   crl.y = gh/2
@@ -27,7 +28,7 @@ function circle2:draw()
   for i, v in ipairs(listOfCircles2) do
     love.graphics.setColor(28 / 255, 31 / 255, 39 / 255, 1)
     love.graphics.circle("fill", v.x, 
-                                 v.y, 45)  
+                                 v.y, v.radius)  
   end
 end
 

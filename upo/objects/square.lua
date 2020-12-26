@@ -1,9 +1,10 @@
 square = {}
 listOfSquares = {}
 
-function createSquare(speed)
+function createSquare(speed, triangleSpeed)
   local sqr = {}
   sqr.speed = speed
+  sqr.triangleSpeed = triangleSpeed
   sqr.direction = math.random(1,4) --1=down, 2=right, 3=left, 4=up
   if (sqr.direction == 1) then
     sqr.x = math.random(200, 1400)
@@ -38,14 +39,14 @@ function square:update(dt)
     end
     
     if (v.timeTillExplode < 0) then
-      createTriangle(v.x, v.y, 1, 320)
-      createTriangle(v.x, v.y, 2, 320)
-      createTriangle(v.x, v.y, 3, 320)
-      createTriangle(v.x, v.y, 4, 320)
-      createTriangle(v.x, v.y, 5, 320)
-      createTriangle(v.x, v.y, 6, 320)
-      createTriangle(v.x, v.y, 7, 320)
-      createTriangle(v.x, v.y, 8, 320)
+      createTriangle(v.x, v.y, 1, v.triangleSpeed)
+      createTriangle(v.x, v.y, 2, v.triangleSpeed)
+      createTriangle(v.x, v.y, 3, v.triangleSpeed)
+      createTriangle(v.x, v.y, 4, v.triangleSpeed)
+      createTriangle(v.x, v.y, 5, v.triangleSpeed)
+      createTriangle(v.x, v.y, 6, v.triangleSpeed)
+      createTriangle(v.x, v.y, 7, v.triangleSpeed)
+      createTriangle(v.x, v.y, 8, v.triangleSpeed)
       
       table.remove(listOfSquares, i)      
     end

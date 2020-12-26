@@ -1,9 +1,10 @@
 circle = {}
 listOfCircles = {}
 
-function createCircle(speed, direction)
+function createCircle(radius, speed, rotation, direction)
   local crl = {}
-  crl.rotation = math.random(2*math.pi*100)/100
+  crl.radius = radius
+  crl.rotation = rotation
   if (direction == 0) then
     crl.speed = -speed
     crl.x = 500
@@ -30,7 +31,7 @@ function circle:draw()
   for i, v in ipairs(listOfCircles) do
     love.graphics.setColor(28 / 255, 31 / 255, 39 / 255, 1)
     love.graphics.circle("fill", math.sin(v.rotation)*v.x - math.cos(v.rotation)*v.y + gw/2,
-                                 math.cos(v.rotation)*v.x + math.sin(v.rotation)*v.y + gh/2, 45)
+                                 math.cos(v.rotation)*v.x + math.sin(v.rotation)*v.y + gh/2, v.radius)
   end
 end
 

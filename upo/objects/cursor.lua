@@ -126,7 +126,7 @@ end
 function cursor:checkCollisionForCircles()
   for i, v in ipairs(listOfCircles) do
     if (circleDetect(cursor:getPositionX(), cursor:getPositionY(), math.sin(v.rotation)*v.x - math.cos(v.rotation)*v.y + gw/2, 
-                            math.cos(v.rotation)*v.x + math.sin(v.rotation)*v.y + gh/2, 45)) then
+                            math.cos(v.rotation)*v.x + math.sin(v.rotation)*v.y + gh/2, v.radius-10)) then
       maingame:die()
     end
   end
@@ -134,7 +134,7 @@ end
 
 function cursor:checkCollisionForCircles2()
   for i, v in ipairs(listOfCircles2) do
-    if (circleDetect(cursor:getPositionX(), cursor:getPositionY(), v.x, v.y, 45)) then
+    if (circleDetect(cursor:getPositionX(), cursor:getPositionY(), v.x, v.y, v.radius-10)) then
       maingame:die()
     end
   end
