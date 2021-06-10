@@ -33,7 +33,7 @@ local timer
 function maingame:load()
   restartButton = newButton(gw/2 - 200, gh*0.44, 400, 130, function() maingame:restart() end)
   exitButton = newButton(gw/2 - 200, gh*0.56, 400, 130, function() maingame:endLevel() end)
-  
+
   failsound = audio:newSource("assets/failsound.wav", "stream")
   failsound:setVolume(volumeValue * 0.001)
   failsound:setLooping(false)
@@ -148,8 +148,8 @@ function maingame:die()
   laser:clear()
   laser2:clear()
   gamemusic:stop()
-  failsound:play()  
-  
+  failsound:play()
+
   if (timer > savemanager.highscores.levelScore[levelIndex]) then
     savemanager.highscores.levelScore[levelIndex] = tonumber(string.format("%0.1f", timer))
     savemanager:saveHighscores()

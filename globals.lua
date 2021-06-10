@@ -1,5 +1,6 @@
 gw = 1920
 gh = 1080
+isFullScreen = false
 
 defaultFont = love.graphics.getFont()
 bigScoreFont = love.graphics.newFont('assets/roboto-thin.ttf', 106)
@@ -16,7 +17,8 @@ resolutionList = {
                   {1366, 768},
                   {1280, 720},
                   {1024, 576},
-                  {800, 450}}
+                  {800, 450},
+                  {0, 0}}
 
 
 

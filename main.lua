@@ -15,7 +15,12 @@ function love.load()
   resolutionIndex = savemanager.settings.resolutionIndex or 3
   statemanager:load()
   math.randomseed(os.time())
-  simpleScale.setWindow(gw, gh, resolutionList[resolutionIndex][1], resolutionList[resolutionIndex][2], {fullscreen = true})
+  if resolutionList[resolutionIndex][1] == 0 and resolutionList[resolutionIndex][2] == 0 then
+    isFullScreen = true
+  else
+    isFullScreen = false
+  end
+  simpleScale.setWindow(gw, gh, resolutionList[resolutionIndex][1], resolutionList[resolutionIndex][2], {fullscreen = isFullScreen})
   love.window.setVSync(0)
   cursor:load()
   love.graphics.setBackgroundColor(0.1, 0.1, 0.1, 1)

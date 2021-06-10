@@ -13,7 +13,7 @@ function mainmenu:load()
   buttonhover = audio:newSource("assets/buttonhover.wav", "stream")
   buttonhover:setVolume(volumeValue * 0.001)
   buttonhover:setLooping(false)
-  
+
   buttonhit = audio:newSource("assets/buttonhit2.wav", "stream")
   buttonhit:setVolume(volumeValue * 0.001)
   buttonhit:setLooping(false)
@@ -25,7 +25,7 @@ function mainmenu:load()
   menumusic:setVolume(volumeValue * 0.001)
   menumusic:setLooping(true)
   menumusic:play()
-    
+
   menumusic:onBeat(function()
     newCircleEffect(450+menumusic:getEnergy()*10, 190)
   end)
@@ -64,7 +64,12 @@ function mainmenu:saveSettings()
   savemanager:saveSettings(resolutionIndex, volumeValue)
   if (changedResolution) then
     changedResolution = false
-    simpleScale.updateWindow(resolutionList[resolutionIndex][1], resolutionList[resolutionIndex][2])
+    if resolutionList[resolutionIndex][1] == 0 and resolutionList[resolutionIndex][2] == 0 then
+      isFullScreen = true
+    else
+      isFullScreen = false
+    end
+    simpleScale.updateWindow(resolutionList[resolutionIndex][1], resolutionList[resolutionIndex][2], {fullscreen=isFullScreen})
   end
 end
 
@@ -273,7 +278,11 @@ function mainmenu:optionsButtons()
                                 gw/2 + 450+menumusic:getEnergy()*10, gh*0.5 + 100,
                                 gw/2 - 450-menumusic:getEnergy()*10, gh*0.5 + 100)
   love.graphics.setColor(White)
-  love.graphics.printf("Resolution: " .. resolutionList[resolutionIndex][1] .. "x" .. resolutionList[resolutionIndex][2], 0, gh*0.52, gw, "center")
+  if resolutionList[resolutionIndex][1] == 0 and resolutionList[resolutionIndex][2] == 0 then
+    love.graphics.printf("Resolution: Fullscreen", 0, gh*0.52, gw, "center")
+  else
+    love.graphics.printf("Resolution: " .. resolutionList[resolutionIndex][1] .. "x" .. resolutionList[resolutionIndex][2], 0, gh*0.52, gw, "center")
+  end
 
   if (optionsVolumeButton:getHoverState()) then
     love.graphics.setColor(Opacity17)
