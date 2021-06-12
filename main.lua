@@ -33,8 +33,6 @@ function love.load()
 
   discordRPC.initialize(appId, true)
   now = os.time(os.date("*t"))
-  detailsNow = "In Mainmenu"
-  stateNow = ""
   nextPresenceUpdate = 0
 end
 

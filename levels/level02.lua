@@ -7,7 +7,7 @@ function level02:load()
 end
 
 function level02:update(dt, timer)
-  if (respawnTime >= 3/math.sqrt(timer)) then
+  if (respawnTime >= 6/math.sqrt(timer)) then
     respawnTime = 0
     createLaser2(300)
   else

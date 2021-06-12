@@ -27,8 +27,7 @@ end
 function circle2:draw()
   for i, v in ipairs(listOfCircles2) do
     love.graphics.setColor(28 / 255, 31 / 255, 39 / 255, 1)
-    love.graphics.circle("fill", v.x, 
-                                 v.y, v.radius)  
+    love.graphics.circle("fill", v.x, v.y, v.radius)
   end
 end
 

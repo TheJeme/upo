@@ -8,6 +8,7 @@ require 'levels/level06'
 levelmanager = {}
 
 function levelmanager:loadLevel(levelIndex)
+  math.randomseed(os.time())
   if (levelIndex == 1) then
     level01:load()
   elseif (levelIndex == 2) then
