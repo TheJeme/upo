@@ -12,7 +12,7 @@ local appId = require 'applicationId'
 function love.load()
   savemanager:load()
   volumeValue = savemanager.settings.volume or 100
-  resolutionIndex = savemanager.settings.resolutionIndex or 3
+  resolutionIndex = savemanager.settings.resolutionIndex or 8
   statemanager:load()
   math.randomseed(os.time())
   if resolutionList[resolutionIndex][1] == 0 and resolutionList[resolutionIndex][2] == 0 then

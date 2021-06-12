@@ -12,11 +12,9 @@ function mainmenu:load()
 
   buttonhover = audio:newSource("assets/buttonhover.wav", "stream")
   buttonhover:setVolume(volumeValue * 0.001)
-  buttonhover:setLooping(false)
 
   buttonhit = audio:newSource("assets/buttonhit2.wav", "stream")
   buttonhit:setVolume(volumeValue * 0.001)
-  buttonhit:setLooping(false)
 
   menumusic = audio:newSource("songs/Hinkik - Ena.mp3", "stream")
   menumusic:parse()
@@ -487,6 +485,9 @@ function mainmenu:changeVolume(value)
     volumeValue = 0
   end
   menumusic:setVolume(volumeValue * 0.001)
+  buttonhover:setVolume(volumeValue * 0.001)
+  buttonhit:setVolume(volumeValue * 0.001)
+  failsound:setVolume(volumeValue * 0.001)
 end
 
 return mainmenu

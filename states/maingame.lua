@@ -36,7 +36,6 @@ function maingame:load()
 
   failsound = audio:newSource("assets/failsound.wav", "stream")
   failsound:setVolume(volumeValue * 0.001)
-  failsound:setLooping(false)
 end
 
 function maingame:update(dt)
