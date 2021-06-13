@@ -12,7 +12,7 @@ logoFont = love.graphics.newFont('assets/rondalo.ttf', 152)
 
 resolutionList = {
                   {2560, 1440},
-                  {450, 1080},
+                  {1920, 1080},
                   {1600, 900},
                   {1366, 768},
                   {1280, 720},
